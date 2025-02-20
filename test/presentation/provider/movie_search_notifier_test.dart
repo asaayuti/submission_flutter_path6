@@ -3,24 +3,29 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/usecases/movie/search_movies.dart';
-import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
+import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
+import 'package:ditonton/presentation/provider/search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'movie_search_notifier_test.mocks.dart';
 
-@GenerateMocks([SearchMovies])
+@GenerateMocks([SearchMovies, SearchTvSeries])
 void main() {
-  late MovieSearchNotifier provider;
+  late SearchNotifier provider;
   late MockSearchMovies mockSearchMovies;
+  late MockSearchTvSeries mockSearchTvSeries;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockSearchMovies = MockSearchMovies();
-    provider = MovieSearchNotifier(searchMovies: mockSearchMovies)
-      ..addListener(() {
+    mockSearchTvSeries = MockSearchTvSeries();
+    provider = SearchNotifier(
+      searchMovies: mockSearchMovies,
+      searchTvSeries: mockSearchTvSeries,
+    )..addListener(() {
         listenerCallCount += 1;
       });
   });
@@ -50,7 +55,7 @@ void main() {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchMovieSearch(tQuery);
+      provider.fetchSearchResults(tQuery);
       // assert
       expect(provider.state, RequestState.Loading);
     });
@@ -61,10 +66,10 @@ void main() {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchMovieSearch(tQuery);
+      await provider.fetchSearchResults(tQuery);
       // assert
       expect(provider.state, RequestState.Loaded);
-      expect(provider.searchResult, tMovieList);
+      expect(provider.searchMovies, tMovieList);
       expect(listenerCallCount, 2);
     });
 
@@ -73,7 +78,7 @@ void main() {
       when(mockSearchMovies.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchMovieSearch(tQuery);
+      await provider.fetchSearchResults(tQuery);
       // assert
       expect(provider.state, RequestState.Error);
       expect(provider.message, 'Server Failure');

@@ -31,7 +31,7 @@ class TvSeriesDetailResponse extends Equatable {
   });
 
   bool adult;
-  String backdropPath;
+  String? backdropPath;
   List<int> episodeRunTime;
   DateTime firstAirDate;
   List<GenreModel> genres;
@@ -48,7 +48,7 @@ class TvSeriesDetailResponse extends Equatable {
   String originalName;
   String overview;
   double popularity;
-  String posterPath;
+  String? posterPath;
   String status;
   String tagline;
   String type;
