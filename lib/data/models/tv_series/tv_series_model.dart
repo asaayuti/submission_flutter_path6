@@ -20,7 +20,7 @@ class TvSeriesModel extends Equatable {
   });
 
   bool adult;
-  String backdropPath;
+  String? backdropPath;
   List<int> genreIds;
   int id;
   List<String> originCountry;
