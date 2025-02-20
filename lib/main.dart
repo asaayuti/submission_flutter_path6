@@ -7,6 +7,9 @@ import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_page.dart';
 import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
@@ -86,6 +89,16 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
+                settings: settings,
+              );
+            case PopularTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
+            case TopRatedTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
+            case TvSeriesDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TvSeriesDetailPage(id: id),
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:

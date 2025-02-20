@@ -19,7 +19,7 @@ class TvSeriesDetail extends Equatable {
 
   bool adult;
   String backdropPath;
-  List<int> episodeRunTime;
+  List<int>? episodeRunTime;
   DateTime firstAirDate;
   List<Genre> genres;
   int id;
