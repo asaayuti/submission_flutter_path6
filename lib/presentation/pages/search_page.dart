@@ -14,7 +14,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Search')),
+      appBar: AppBar(title: const Text('Search')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -22,92 +22,96 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<SearchNotifier>(
-                  context,
-                  listen: false,
-                ).fetchSearchResults(query);
+                context.read<SearchNotifier>().fetchSearchResults(query);
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search title',
                 prefixIcon: Icon(Icons.search),
                 border: OutlineInputBorder(),
               ),
               textInputAction: TextInputAction.search,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text('Search Result', style: kHeading6),
-            Consumer<SearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (data.state == RequestState.loaded) {
-                  final movies = data.movieSearchResult;
-                  final tvSeries = data.tvSeriesSearchResult;
-                  return Expanded(
-                    child: ListView(
+            Expanded(
+              child: Consumer<SearchNotifier>(
+                builder: (context, data, child) {
+                  if (data.state == RequestState.loading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (data.state == RequestState.loaded) {
+                    return ListView(
                       padding: const EdgeInsets.all(8),
                       children: [
-                        if (movies.isNotEmpty) ...[
-                          Text('Movies', style: kHeading6),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final movie = movies[index];
-                              return MovieCard(movie);
-                            },
-                            itemCount: movies.length,
-                          ),
-                        ] else ...[
-                          Text('Movies', style: kHeading6),
-                          Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Center(child: Text('No movies found')),
-                          ),
-                        ],
-                        if (tvSeries.isNotEmpty) ...[
-                          Text('TV Series', style: kHeading6),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final tvSeriesItem = tvSeries[index];
-                              return TvSeriesCard(tvSeriesItem);
-                            },
-                            itemCount: tvSeries.length,
-                          ),
-                        ] else ...[
-                          Text('TV Series', style: kHeading6),
-                          Padding(
-                            padding: const EdgeInsets.all(24.0),
-                            child: Center(child: Text('No TV series found')),
-                          ),
-                        ],
+                        _buildList(
+                          title: 'Movies',
+                          items: data.movieSearchResult,
+                          itemBuilder: (item) => MovieCard(item),
+                        ),
+                        _buildList(
+                          title: 'TV Series',
+                          items: data.tvSeriesSearchResult,
+                          itemBuilder: (item) => TvSeriesCard(item),
+                        ),
                       ],
-                    ),
-                  );
-                } else {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Movies', style: kHeading6),
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Center(child: Text('No movies found')),
-                      ),
-                      Text('TV Series', style: kHeading6),
-                      Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Center(child: Text('No TV series found')),
-                      ),
-                    ],
-                  );
-                }
-              },
+                    );
+                  }
+                  return _buildEmptyState();
+                },
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
+  Widget _buildList<T>({
+    required String title,
+    required List<T> items,
+    required Widget Function(T) itemBuilder,
+  }) {
+    final filteredItems =
+        items.where((item) {
+          final path = (item as dynamic).posterPath;
+          return path?.isNotEmpty ?? false;
+        }).toList();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: kHeading6),
+        if (filteredItems.isNotEmpty)
+          ListView.separated(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: filteredItems.length,
+            separatorBuilder: (_, __) => const SizedBox(height: 8),
+            itemBuilder: (context, index) => itemBuilder(filteredItems[index]),
+          )
+        else
+          _buildNoResults(),
+      ],
+    );
+  }
+
+  Widget _buildNoResults() => const Padding(
+    padding: EdgeInsets.all(24.0),
+    child: Center(child: Text('No results found')),
+  );
+
+  Widget _buildEmptyState() => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      _buildList(
+        title: 'Movies',
+        items: [],
+        itemBuilder: (_) => const SizedBox(),
+      ),
+      _buildList(
+        title: 'TV Series',
+        items: [],
+        itemBuilder: (_) => const SizedBox(),
+      ),
+    ],
+  );
 }
