@@ -1,0 +1,130 @@
+{
+  "adult": false,
+  "backdrop_path": "/81FKp9UMwZZ7Xk2ksV6z8qjG6pU.jpg",
+  "created_by": [],
+  "episode_run_time": [
+    180,
+    30
+  ],
+  "first_air_date": "2019-01-08",
+  "genres": [
+    {
+      "id": 10764,
+      "name": "Reality"
+    }
+  ],
+  "homepage": "https://www.telecinco.es/ghduo/8905/",
+  "id": 85231,
+  "in_production": true,
+  "languages": [
+    "es"
+  ],
+  "last_air_date": "2025-02-19",
+  "last_episode_to_air": {
+    "id": 5988035,
+    "name": "Episode 58",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-02-21",
+    "episode_number": 58,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 3,
+    "show_id": 85231,
+    "still_path": null
+  },
+  "name": "GH Dúo",
+  "next_episode_to_air": {
+    "id": 5988036,
+    "name": "Episode 59",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2025-02-23",
+    "episode_number": 59,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 3,
+    "show_id": 85231,
+    "still_path": null
+  },
+  "networks": [
+    {
+      "id": 53,
+      "logo_path": "/nSksjyoitz94qhfon6uzJj6ekj9.png",
+      "name": "Telecinco",
+      "origin_country": "ES"
+    }
+  ],
+  "number_of_episodes": 162,
+  "number_of_seasons": 3,
+  "origin_country": [
+    "ES"
+  ],
+  "original_language": "es",
+  "original_name": "GH Dúo",
+  "overview": "",
+  "popularity": 1992.373,
+  "poster_path": "/sgPv3qMYHKwxz9KQxjyQokmPUHj.jpg",
+  "production_companies": [
+    {
+      "id": 73429,
+      "logo_path": null,
+      "name": "Bulldog",
+      "origin_country": ""
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "ES",
+      "name": "Spain"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2019-01-08",
+      "episode_count": 45,
+      "id": 114905,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/pYO7q4JrBhF7gS2pb5RUJMZzCTR.jpg",
+      "season_number": 1,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2024-01-11",
+      "episode_count": 58,
+      "id": 133464,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/oVjia8ShhQMYrG25rlPOcajo31z.jpg",
+      "season_number": 2,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2025-01-02",
+      "episode_count": 59,
+      "id": 434243,
+      "name": "Season 3",
+      "overview": "",
+      "poster_path": "/sl2wklZqDAdiuzw3NGYzlW2R6bh.jpg",
+      "season_number": 3,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Reality",
+  "vote_average": 7.3,
+  "vote_count": 3
+}

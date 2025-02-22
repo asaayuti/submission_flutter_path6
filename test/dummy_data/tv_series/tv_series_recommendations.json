@@ -1,0 +1,29 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/fxAcaqrnP4qZHLDUYmkzCRUvDpQ.jpg",
+      "id": 67418,
+      "name": "Ab ins Beet! Die Garten-Soap",
+      "original_name": "Ab ins Beet! Die Garten-Soap",
+      "overview": "",
+      "poster_path": "/nzflHl91zjR1Akas33j8gV6OLxo.jpg",
+      "media_type": "tv",
+      "adult": false,
+      "original_language": "de",
+      "genre_ids": [
+        10766,
+        10764
+      ],
+      "popularity": 3.006,
+      "first_air_date": "2014-01-01",
+      "vote_average": 8.2,
+      "vote_count": 5,
+      "origin_country": [
+        "DE"
+      ]
+    }
+  ],
+  "total_pages": 2,
+  "total_results": 40
+}

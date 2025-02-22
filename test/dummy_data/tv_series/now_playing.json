@@ -1,0 +1,27 @@
+{
+    "page": 1,
+    "results": [
+      {
+        "adult": false,
+        "backdrop_path": "/81FKp9UMwZZ7Xk2ksV6z8qjG6pU.jpg",
+        "genre_ids": [
+          10764
+        ],
+        "id": 85231,
+        "origin_country": [
+          "ES"
+        ],
+        "original_language": "es",
+        "original_name": "GH Dúo",
+        "overview": "",
+        "popularity": 1992.373,
+        "poster_path": "/sgPv3qMYHKwxz9KQxjyQokmPUHj.jpg",
+        "first_air_date": "2019-01-08",
+        "name": "GH Dúo",
+        "vote_average": 7.3,
+        "vote_count": 3
+      }
+    ],
+    "total_pages": 71,
+    "total_results": 1408
+  }

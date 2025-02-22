@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-22 14:29:27</td>
+            <td class="headerValue">2025-02-22 22:00:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -70,7 +70,7 @@
 <span id="L8"><span class="lineNum">       8</span>              : </span>
 <span id="L9"><span class="lineNum">       9</span> <span class="tlaGNC tlaBgGNC">           1 :   PopularMoviesNotifier(this.getPopularMovies);</span></span>
 <span id="L10"><span class="lineNum">      10</span>              : </span>
-<span id="L11"><span class="lineNum">      11</span>              :   RequestState _state = RequestState.Empty;</span>
+<span id="L11"><span class="lineNum">      11</span>              :   RequestState _state = RequestState.empty;</span>
 <span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC">           2 :   RequestState get state =&gt; _state;</span></span>
 <span id="L13"><span class="lineNum">      13</span>              : </span>
 <span id="L14"><span class="lineNum">      14</span>              :   List&lt;Movie&gt; _movies = [];</span>
@@ -80,7 +80,7 @@
 <span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           2 :   String get message =&gt; _message;</span></span>
 <span id="L19"><span class="lineNum">      19</span>              : </span>
 <span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           1 :   Future&lt;void&gt; fetchPopularMovies() async {</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :     _state = RequestState.Loading;</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :     _state = RequestState.loading;</span></span>
 <span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           1 :     notifyListeners();</span></span>
 <span id="L23"><span class="lineNum">      23</span>              : </span>
 <span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           2 :     final result = await getPopularMovies.execute();</span></span>
@@ -88,12 +88,12 @@
 <span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :     result.fold(</span></span>
 <span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           1 :       (failure) {</span></span>
 <span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           2 :         _message = failure.message;</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         _state = RequestState.Error;</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         _state = RequestState.error;</span></span>
 <span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :         notifyListeners();</span></span>
 <span id="L31"><span class="lineNum">      31</span>              :       },</span>
 <span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :       (moviesData) {</span></span>
 <span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         _movies = moviesData;</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :         _state = RequestState.Loaded;</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :         _state = RequestState.loaded;</span></span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :         notifyListeners();</span></span>
 <span id="L36"><span class="lineNum">      36</span>              :       },</span>
 <span id="L37"><span class="lineNum">      37</span>              :     );</span>

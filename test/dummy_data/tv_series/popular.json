@@ -1,0 +1,27 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/4ErOWmDGyGk0qCK1J8blAoj1a7a.jpg",
+      "genre_ids": [
+        18
+      ],
+      "id": 252373,
+      "origin_country": [
+        "PT"
+      ],
+      "original_language": "pt",
+      "original_name": "A Promessa",
+      "overview": "",
+      "popularity": 2003.923,
+      "poster_path": "/uptgxt2apx5wwWItQzqL0HwhjZC.jpg",
+      "first_air_date": "2024-06-18",
+      "name": "A Promessa",
+      "vote_average": 6.2,
+      "vote_count": 14
+    }
+  ],
+  "total_pages": 9601,
+  "total_results": 192012
+}
