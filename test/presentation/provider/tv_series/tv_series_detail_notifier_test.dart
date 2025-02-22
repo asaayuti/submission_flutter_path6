@@ -50,7 +50,7 @@ void main() {
 
   final tId = 1;
 
-  void _arrangeUsecase() {
+  void arrangeUsecase() {
     when(mockGetTvSeriesDetail.execute(tId))
         .thenAnswer((_) async => Right(testTvSeriesDetail));
     when(mockGetTvSeriesRecommendations.execute(tId))
@@ -60,7 +60,7 @@ void main() {
   group('Get TvSeries Detail', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
@@ -70,21 +70,21 @@ void main() {
 
     test('should change state to Loading when usecase is called', () {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Loading);
+      expect(provider.tvSeriesState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
     test('should change tvSeries when data is gotten successfully', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Loaded);
+      expect(provider.tvSeriesState, RequestState.loaded);
       expect(provider.tvSeries, testTvSeriesDetail);
       expect(listenerCallCount, 3);
     });
@@ -93,11 +93,11 @@ void main() {
         'should change recommendation tvSeriess when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Loaded);
+      expect(provider.tvSeriesState, RequestState.loaded);
       expect(provider.tvSeriesRecommendations, testTvSeriesList);
     });
   });
@@ -105,7 +105,7 @@ void main() {
   group('Get TvSeries Recommendations', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
@@ -116,11 +116,11 @@ void main() {
     test('should update recommendation state when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(provider.tvSeriesRecommendations, testTvSeriesList);
     });
 
@@ -133,7 +133,7 @@ void main() {
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -211,7 +211,7 @@ void main() {
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Error);
+      expect(provider.tvSeriesState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

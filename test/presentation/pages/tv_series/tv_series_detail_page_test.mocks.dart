@@ -171,7 +171,7 @@ class MockTvSeriesDetailNotifier extends _i1.Mock
   @override
   _i9.RequestState get tvSeriesState => (super.noSuchMethod(
         Invocation.getter(#tvSeriesState),
-        returnValue: _i9.RequestState.Empty,
+        returnValue: _i9.RequestState.empty,
       ) as _i9.RequestState);
 
   @override
@@ -183,7 +183,7 @@ class MockTvSeriesDetailNotifier extends _i1.Mock
   @override
   _i9.RequestState get recommendationState => (super.noSuchMethod(
         Invocation.getter(#recommendationState),
-        returnValue: _i9.RequestState.Empty,
+        returnValue: _i9.RequestState.empty,
       ) as _i9.RequestState);
 
   @override

@@ -3,7 +3,7 @@ import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesDetailResponse extends Equatable {
-  TvSeriesDetailResponse({
+  const TvSeriesDetailResponse({
     required this.adult,
     required this.backdropPath,
     required this.episodeRunTime,
@@ -30,30 +30,30 @@ class TvSeriesDetailResponse extends Equatable {
     required this.voteCount,
   });
 
-  bool adult;
-  String? backdropPath;
-  List<int> episodeRunTime;
-  DateTime firstAirDate;
-  List<GenreModel> genres;
-  String homepage;
-  int id;
-  bool inProduction;
-  List<String> languages;
-  DateTime lastAirDate;
-  String name;
-  int numberOfEpisodes;
-  int numberOfSeasons;
-  List<String> originCountry;
-  String originalLanguage;
-  String originalName;
-  String overview;
-  double popularity;
-  String? posterPath;
-  String status;
-  String tagline;
-  String type;
-  double voteAverage;
-  int voteCount;
+  final bool adult;
+  final String? backdropPath;
+  final List<int> episodeRunTime;
+  final DateTime firstAirDate;
+  final List<GenreModel> genres;
+  final String homepage;
+  final int id;
+  final bool inProduction;
+  final List<String> languages;
+  final DateTime lastAirDate;
+  final String name;
+  final int numberOfEpisodes;
+  final int numberOfSeasons;
+  final List<String> originCountry;
+  final String originalLanguage;
+  final String originalName;
+  final String overview;
+  final double popularity;
+  final String? posterPath;
+  final String status;
+  final String tagline;
+  final String type;
+  final double voteAverage;
+  final int voteCount;
 
   factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvSeriesDetailResponse(
@@ -114,18 +114,18 @@ class TvSeriesDetailResponse extends Equatable {
 
   TvSeriesDetail toEntity() {
     return TvSeriesDetail(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      episodeRunTime: this.episodeRunTime,
-      firstAirDate: this.firstAirDate,
-      genres: this.genres.map((genre) => genre.toEntity()).toList(),
-      id: this.id,
-      name: this.name,
-      originalName: this.originalName,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+      adult: adult,
+      backdropPath: backdropPath,
+      episodeRunTime: episodeRunTime,
+      firstAirDate: firstAirDate,
+      genres: genres.map((genre) => genre.toEntity()).toList(),
+      id: id,
+      name: name,
+      originalName: originalName,
+      overview: overview,
+      posterPath: posterPath,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 

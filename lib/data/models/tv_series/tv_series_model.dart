@@ -2,7 +2,7 @@ import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
 import 'package:equatable/equatable.dart';
 
 class TvSeriesModel extends Equatable {
-  TvSeriesModel({
+  const TvSeriesModel({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -19,20 +19,20 @@ class TvSeriesModel extends Equatable {
     required this.voteCount,
   });
 
-  bool adult;
-  String? backdropPath;
-  List<int> genreIds;
-  int id;
-  List<String> originCountry;
-  String originalLanguage;
-  String originalName;
-  String overview;
-  double popularity;
-  String? posterPath;
-  DateTime firstAirDate;
-  String name;
-  double voteAverage;
-  int voteCount;
+  final bool adult;
+  final String? backdropPath;
+  final List<int> genreIds;
+  final int id;
+  final List<String> originCountry;
+  final String originalLanguage;
+  final String originalName;
+  final String overview;
+  final double popularity;
+  final String? posterPath;
+  final DateTime firstAirDate;
+  final String name;
+  final double voteAverage;
+  final int voteCount;
 
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) => TvSeriesModel(
         adult: json["adult"],
@@ -71,20 +71,20 @@ class TvSeriesModel extends Equatable {
 
   TvSeries toEntity() {
     return TvSeries(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genreIds: this.genreIds,
-      id: this.id,
-      originCountry: this.originCountry,
-      originalLanguage: this.originalLanguage,
-      originalName: this.originalName,
-      overview: this.overview,
-      popularity: this.popularity,
-      posterPath: this.posterPath,
-      firstAirDate: this.firstAirDate,
-      name: this.name,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      id: id,
+      originCountry: originCountry,
+      originalLanguage: originalLanguage,
+      originalName: originalName,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      firstAirDate: firstAirDate,
+      name: name,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 

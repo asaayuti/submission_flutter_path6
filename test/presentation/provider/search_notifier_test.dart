@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/usecases/movie/search_movies.dart';
 import 'package:ditonton/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:ditonton/presentation/provider/search_notifier.dart';
@@ -41,7 +40,7 @@ void main() {
       // act
       provider.fetchSearchResults(testQuery);
       // assert
-      expect(provider.state, RequestState.Loading);
+      expect(provider.state, RequestState.loading);
     });
 
     test('should update search result data when data is gotten successfully',
@@ -54,7 +53,7 @@ void main() {
       // act
       await provider.fetchSearchResults(testQuery);
       // assert
-      expect(provider.state, RequestState.Loaded);
+      expect(provider.state, RequestState.loaded);
       expect(provider.movieSearchResult, testMovieList);
       expect(provider.tvSeriesSearchResult, testTvSeriesList);
       expect(listenerCallCount, 2);
@@ -69,7 +68,7 @@ void main() {
       // act
       await provider.fetchSearchResults(testQuery);
       // assert
-      expect(provider.state, RequestState.Error);
+      expect(provider.state, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

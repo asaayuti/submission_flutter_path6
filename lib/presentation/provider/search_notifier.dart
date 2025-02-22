@@ -11,7 +11,7 @@ class SearchNotifier extends ChangeNotifier {
 
   SearchNotifier({required this.searchMovies, required this.searchTvSeries});
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
   RequestState get state => _state;
 
   List<Movie> _movieSearchResult = [];
@@ -24,7 +24,7 @@ class SearchNotifier extends ChangeNotifier {
   String get message => _message;
 
   Future<void> fetchSearchResults(String query) async {
-    _state = RequestState.Loading;
+    _state = RequestState.loading;
     notifyListeners();
 
     final movieResult = await searchMovies.execute(query);
@@ -54,10 +54,10 @@ class SearchNotifier extends ChangeNotifier {
     );
 
     if (hasError) {
-      _state = RequestState.Error;
+      _state = RequestState.error;
       _message = errorMsg;
     } else {
-      _state = RequestState.Loaded;
+      _state = RequestState.loaded;
     }
     notifyListeners();
   }

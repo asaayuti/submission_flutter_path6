@@ -8,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist';
+  static const routeName = '/watchlist';
+
+  const WatchlistPage({Key? key}) : super(key: key);
 
   @override
-  _WatchlistPageState createState() => _WatchlistPageState();
+  State<WatchlistPage> createState() => _WatchlistPageState();
 }
 
 class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
@@ -19,6 +21,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   void initState() {
     super.initState();
     Future.microtask(() {
+      if (!mounted) return;
       Provider.of<WatchlistMovieNotifier>(context, listen: false)
           .fetchWatchlistMovies();
       Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
@@ -32,6 +35,7 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
+  @override
   void didPopNext() {
     Provider.of<WatchlistMovieNotifier>(context, listen: false)
         .fetchWatchlistMovies();
@@ -66,9 +70,9 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   Widget _buildWatchlistMovies() {
     return Consumer<WatchlistMovieNotifier>(
       builder: (context, data, child) {
-        if (data.watchlistState == RequestState.Loading) {
+        if (data.watchlistState == RequestState.loading) {
           return Center(child: CircularProgressIndicator());
-        } else if (data.watchlistState == RequestState.Loaded) {
+        } else if (data.watchlistState == RequestState.loaded) {
           return ListView.builder(
             itemBuilder: (context, index) {
               final movie = data.watchlistMovies[index];
@@ -89,9 +93,9 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
   Widget _buildWatchlistTvs() {
     return Consumer<WatchlistTvSeriesNotifier>(
       builder: (context, data, child) {
-        if (data.watchlistState == RequestState.Loading) {
+        if (data.watchlistState == RequestState.loading) {
           return Center(child: CircularProgressIndicator());
-        } else if (data.watchlistState == RequestState.Loaded) {
+        } else if (data.watchlistState == RequestState.loaded) {
           return ListView.builder(
             itemBuilder: (context, index) {
               final tv = data.watchlistTvSeries[index];

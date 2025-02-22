@@ -68,7 +68,7 @@ void main() {
   );
   final tMovies = <Movie>[tMovie];
 
-  void _arrangeUsecase() {
+  void arrangeUsecase() {
     when(mockGetMovieDetail.execute(tId))
         .thenAnswer((_) async => Right(testMovieDetail));
     when(mockGetMovieRecommendations.execute(tId))
@@ -78,7 +78,7 @@ void main() {
   group('Get Movie Detail', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -88,21 +88,21 @@ void main() {
 
     test('should change state to Loading when usecase is called', () {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Loading);
+      expect(provider.movieState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
     test('should change movie when data is gotten successfully', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movieState, RequestState.loaded);
       expect(provider.movie, testMovieDetail);
       expect(listenerCallCount, 3);
     });
@@ -110,11 +110,11 @@ void main() {
     test('should change recommendation movies when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movieState, RequestState.loaded);
       expect(provider.movieRecommendations, tMovies);
     });
   });
@@ -122,7 +122,7 @@ void main() {
   group('Get Movie Recommendations', () {
     test('should get data from the usecase', () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
@@ -133,11 +133,11 @@ void main() {
     test('should update recommendation state when data is gotten successfully',
         () async {
       // arrange
-      _arrangeUsecase();
+      arrangeUsecase();
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(provider.movieRecommendations, tMovies);
     });
 
@@ -150,7 +150,7 @@ void main() {
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -228,7 +228,7 @@ void main() {
       // act
       await provider.fetchMovieDetail(tId);
       // assert
-      expect(provider.movieState, RequestState.Error);
+      expect(provider.movieState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
