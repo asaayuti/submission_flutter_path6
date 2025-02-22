@@ -26,8 +26,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     Future.microtask(() {
       Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .fetchTvSeriesDetail(widget.id);
-      // Provider.of<TvSeriesDetailNotifier>(context, listen: false)
-      //     .loadWatchlistStatus(widget.id);
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
+          .loadWatchlistStatus(widget.id);
     });
   }
 
@@ -107,17 +107,17 @@ class DetailContent extends StatelessWidget {
                             ),
                             FilledButton(
                               onPressed: () async {
-                                // if (!isAddedWatchlist) {
-                                //   await Provider.of<TvSeriesDetailNotifier>(
-                                //           context,
-                                //           listen: false)
-                                //       .addWatchlist(tvSeries);
-                                // } else {
-                                //   await Provider.of<TvSeriesDetailNotifier>(
-                                //           context,
-                                //           listen: false)
-                                //       .removeFromWatchlist(tvSeries);
-                                // }
+                                if (!isAddedWatchlist) {
+                                  await Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .addWatchlist(tvSeries);
+                                } else {
+                                  await Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .removeFromWatchlist(tvSeries);
+                                }
 
                                 final message =
                                     Provider.of<TvSeriesDetailNotifier>(context,
