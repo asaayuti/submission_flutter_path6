@@ -30,11 +30,13 @@ class SearchNotifier extends ChangeNotifier {
     final movieResult = await searchMovies.execute(query);
     final tvSeriesResult = await searchTvSeries.execute(query);
 
+    bool hasError = false;
+    String errorMsg = '';
+
     movieResult.fold(
       (failure) {
-        _message = failure.message;
-        _state = RequestState.Error;
-        notifyListeners();
+        hasError = true;
+        errorMsg = failure.message;
       },
       (data) {
         _movieSearchResult = data;
@@ -43,16 +45,20 @@ class SearchNotifier extends ChangeNotifier {
 
     tvSeriesResult.fold(
       (failure) {
-        _message = failure.message;
-        _state = RequestState.Error;
-        notifyListeners();
+        hasError = true;
+        errorMsg = failure.message;
       },
       (data) {
         _tvSeriesSearchResult = data;
       },
     );
 
-    _state = RequestState.Loaded;
+    if (hasError) {
+      _state = RequestState.Error;
+      _message = errorMsg;
+    } else {
+      _state = RequestState.Loaded;
+    }
     notifyListeners();
   }
 }

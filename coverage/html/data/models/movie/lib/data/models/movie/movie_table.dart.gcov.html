@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">78.3&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">23</td>
-            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">23</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-22 13:33:09</td>
+            <td class="headerValue">2025-02-22 14:14:22</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -70,7 +70,7 @@
 <span id="L8"><span class="lineNum">       8</span>              :   final String? posterPath;</span>
 <span id="L9"><span class="lineNum">       9</span>              :   final String? overview;</span>
 <span id="L10"><span class="lineNum">      10</span>              : </span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC tlaBgGNC">           2 :   MovieTable({</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC tlaBgGNC">           3 :   MovieTable({</span></span>
 <span id="L12"><span class="lineNum">      12</span>              :     required this.id,</span>
 <span id="L13"><span class="lineNum">      13</span>              :     required this.title,</span>
 <span id="L14"><span class="lineNum">      14</span>              :     required this.posterPath,</span>
@@ -91,14 +91,14 @@
 <span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         overview: map['overview'],</span></span>
 <span id="L30"><span class="lineNum">      30</span>              :       );</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC tlaBgUNC">           0 :   Map&lt;String, dynamic&gt; toJson() =&gt; {</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :         'id': id,</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :         'title': title,</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :         'posterPath': posterPath,</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :         'overview': overview,</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :   Map&lt;String, dynamic&gt; toJson() =&gt; {</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         'id': id,</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :         'title': title,</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :         'posterPath': posterPath,</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :         'overview': overview,</span></span>
 <span id="L37"><span class="lineNum">      37</span>              :       };</span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">           2 :   Movie toEntity() =&gt; Movie.watchlist(</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           2 :   Movie toEntity() =&gt; Movie.watchlist(</span></span>
 <span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         id: id,</span></span>
 <span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 :         overview: overview,</span></span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :         posterPath: posterPath,</span></span>

@@ -26,6 +26,8 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
+final testQuery = 'spiderman';
+
 final testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
