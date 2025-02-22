@@ -23,16 +23,16 @@ class TvSeries extends Equatable {
     required this.overview,
     required this.posterPath,
     required this.name,
-  })  : adult = false,
-        backdropPath = null,
-        genreIds = [],
-        originCountry = [],
-        originalLanguage = "",
-        originalName = "",
-        popularity = 0.0,
-        firstAirDate = null,
-        voteAverage = 0.0,
-        voteCount = 0;
+  }) : adult = false,
+       backdropPath = null,
+       genreIds = [],
+       originCountry = [],
+       originalLanguage = "",
+       originalName = "",
+       popularity = 0.0,
+       firstAirDate = null,
+       voteAverage = 0.0,
+       voteCount = 0;
 
   final bool? adult;
   final String? backdropPath;
@@ -44,26 +44,26 @@ class TvSeries extends Equatable {
   final String? overview;
   final double? popularity;
   final String? posterPath;
-  final DateTime? firstAirDate;
+  final String? firstAirDate;
   final String? name;
   final double? voteAverage;
   final int? voteCount;
 
   @override
   List<Object?> get props => [
-        adult,
-        backdropPath,
-        genreIds,
-        id,
-        originCountry,
-        originalLanguage,
-        originalName,
-        overview,
-        popularity,
-        posterPath,
-        firstAirDate,
-        name,
-        voteAverage,
-        voteCount,
-      ];
+    adult,
+    backdropPath,
+    genreIds,
+    id,
+    originCountry,
+    originalLanguage,
+    originalName,
+    overview,
+    popularity,
+    posterPath,
+    firstAirDate,
+    name,
+    voteAverage,
+    voteCount,
+  ];
 }

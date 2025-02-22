@@ -5,7 +5,6 @@ import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/entities/movie/movie_detail.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series/tv_series_detail.dart';
-import 'package:intl/intl.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -78,9 +77,6 @@ final testTvSeriesMap = {
   'name': 'name',
 };
 
-String releaseDate = '20-02-2025';
-DateTime parsedDate = DateFormat('dd-MM-yyyy').parse(releaseDate);
-
 final testTvSeriesDetail = TvSeriesDetail(
   adult: false,
   backdropPath: 'backdropPath',
@@ -89,7 +85,7 @@ final testTvSeriesDetail = TvSeriesDetail(
   originalName: 'originalTitle',
   overview: 'overview',
   posterPath: 'posterPath',
-  firstAirDate: parsedDate,
+  firstAirDate: 'firstAirDate',
   episodeRunTime: [120],
   name: 'name',
   voteAverage: 1,
@@ -113,7 +109,7 @@ final testTvSeries = TvSeries(
       'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
   popularity: 60.441,
   posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
-  firstAirDate: parsedDate,
+  firstAirDate: 'firstAirDate',
   name: 'Spider-Man',
   originCountry: ["CO"],
   originalLanguage: "es",

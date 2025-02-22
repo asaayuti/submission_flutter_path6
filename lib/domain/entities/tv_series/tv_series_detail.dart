@@ -20,7 +20,7 @@ class TvSeriesDetail extends Equatable {
   final bool adult;
   final String? backdropPath;
   final List<int>? episodeRunTime;
-  final DateTime firstAirDate;
+  final String firstAirDate;
   final List<Genre> genres;
   final int id;
   final String name;
@@ -32,17 +32,17 @@ class TvSeriesDetail extends Equatable {
 
   @override
   List<Object?> get props => [
-        adult,
-        backdropPath,
-        episodeRunTime,
-        firstAirDate,
-        genres,
-        id,
-        name,
-        originalName,
-        overview,
-        posterPath,
-        voteAverage,
-        voteCount,
-      ];
+    adult,
+    backdropPath,
+    episodeRunTime,
+    firstAirDate,
+    genres,
+    id,
+    name,
+    originalName,
+    overview,
+    posterPath,
+    voteAverage,
+    voteCount,
+  ];
 }
