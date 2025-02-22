@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class TopRatedTvSeriesPage extends StatefulWidget {
   static const routeName = '/top-rated-tv-series';
 
-  const TopRatedTvSeriesPage({Key? key}) : super(key: key);
+  const TopRatedTvSeriesPage({super.key});
 
   @override
   State<TopRatedTvSeriesPage> createState() => _TopRatedTvSeriesPageState();
@@ -19,8 +19,10 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
     super.initState();
     Future.microtask(() {
       if (mounted) {
-        Provider.of<TopRatedTvSeriesNotifier>(context, listen: false)
-            .fetchTopRatedTvSeries();
+        Provider.of<TopRatedTvSeriesNotifier>(
+          context,
+          listen: false,
+        ).fetchTopRatedTvSeries();
       }
     });
   }
@@ -28,17 +30,13 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Top Rated TvSeries'),
-      ),
+      appBar: AppBar(title: Text('Top Rated TvSeries')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<TopRatedTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(child: CircularProgressIndicator());
             } else if (data.state == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {

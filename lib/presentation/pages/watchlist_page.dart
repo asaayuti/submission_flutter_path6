@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 class WatchlistPage extends StatefulWidget {
   static const routeName = '/watchlist';
 
-  const WatchlistPage({Key? key}) : super(key: key);
+  const WatchlistPage({super.key});
 
   @override
   State<WatchlistPage> createState() => _WatchlistPageState();
@@ -22,10 +22,14 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
     super.initState();
     Future.microtask(() {
       if (!mounted) return;
-      Provider.of<WatchlistMovieNotifier>(context, listen: false)
-          .fetchWatchlistMovies();
-      Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-          .fetchWatchlistTvSeries();
+      Provider.of<WatchlistMovieNotifier>(
+        context,
+        listen: false,
+      ).fetchWatchlistMovies();
+      Provider.of<WatchlistTvSeriesNotifier>(
+        context,
+        listen: false,
+      ).fetchWatchlistTvSeries();
     });
   }
 
@@ -37,10 +41,14 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
-    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
-        .fetchWatchlistTvSeries();
+    Provider.of<WatchlistMovieNotifier>(
+      context,
+      listen: false,
+    ).fetchWatchlistMovies();
+    Provider.of<WatchlistTvSeriesNotifier>(
+      context,
+      listen: false,
+    ).fetchWatchlistTvSeries();
   }
 
   @override
@@ -50,18 +58,10 @@ class _WatchlistPageState extends State<WatchlistPage> with RouteAware {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Watchlist'),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Movies'),
-              Tab(text: 'TV Series'),
-            ],
-          ),
+          bottom: TabBar(tabs: [Tab(text: 'Movies'), Tab(text: 'TV Series')]),
         ),
         body: TabBarView(
-          children: [
-            _buildWatchlistMovies(),
-            _buildWatchlistTvs(),
-          ],
+          children: [_buildWatchlistMovies(), _buildWatchlistTvs()],
         ),
       ),
     );

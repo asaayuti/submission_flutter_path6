@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -56,9 +56,7 @@ class _HomePageState extends State<HomePage> {
               ),
               accountName: Text('Ditonton'),
               accountEmail: Text('ditonton@dicoding.com'),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade900,
-              ),
+              decoration: BoxDecoration(color: Colors.grey.shade900),
             ),
             ListTile(
               leading: Icon(Icons.movie),
@@ -92,7 +90,7 @@ class _HomePageState extends State<HomePage> {
               Navigator.pushNamed(context, SearchPage.routeName);
             },
             icon: Icon(Icons.search),
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -101,114 +99,114 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Movies',
-                style: kHeading5,
+              Text('Movies', style: kHeading5),
+              Text('Now Playing', style: kHeading6),
+              Consumer<MovieListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.nowPlayingState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return MovieList(data.nowPlayingMovies);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
               ),
-              Text(
-                'Now Playing',
-                style: kHeading6,
-              ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.nowPlayingMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.routeName),
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      PopularMoviesPage.routeName,
+                    ),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.popularMoviesState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.popularMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              Consumer<MovieListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.popularMoviesState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return MovieList(data.popularMovies);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.routeName),
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      TopRatedMoviesPage.routeName,
+                    ),
               ),
-              Consumer<MovieListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedMoviesState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return MovieList(data.topRatedMovies);
-                } else {
-                  return Text('Failed');
-                }
-              }),
-              Text(
-                'Tv Series',
-                style: kHeading5,
+              Consumer<MovieListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.topRatedMoviesState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return MovieList(data.topRatedMovies);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
               ),
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              Text('Tv Series', style: kHeading5),
+              Text('Now Playing', style: kHeading6),
+              Consumer<TvSeriesListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.nowPlayingState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return TvSeriesList(data.nowPlayingTvSeries);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.nowPlayingState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvSeriesList(data.nowPlayingTvSeries);
-                } else {
-                  return Text('Failed');
-                }
-              }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularTvSeriesPage.routeName),
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      PopularTvSeriesPage.routeName,
+                    ),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.popularTvSeriesState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvSeriesList(data.popularTvSeries);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              Consumer<TvSeriesListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.popularTvSeriesState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return TvSeriesList(data.popularTvSeries);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () => Navigator.pushNamed(
-                    context, TopRatedTvSeriesPage.routeName),
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      TopRatedTvSeriesPage.routeName,
+                    ),
               ),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedTvSeriesState;
-                if (state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (state == RequestState.loaded) {
-                  return TvSeriesList(data.topRatedTvSeries);
-                } else {
-                  return Text('Failed');
-                }
-              }),
+              Consumer<TvSeriesListNotifier>(
+                builder: (context, data, child) {
+                  final state = data.topRatedTvSeriesState;
+                  if (state == RequestState.loading) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state == RequestState.loaded) {
+                    return TvSeriesList(data.topRatedTvSeries);
+                  } else {
+                    return Text('Failed');
+                  }
+                },
+              ),
             ],
           ),
         ),
@@ -220,10 +218,7 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
+        Text(title, style: kHeading6),
         InkWell(
           onTap: onTap,
           child: Padding(
@@ -241,7 +236,7 @@ class _HomePageState extends State<HomePage> {
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  const MovieList(this.movies, {Key? key}) : super(key: key);
+  const MovieList(this.movies, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -265,9 +260,9 @@ class MovieList extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$baseImageUrl${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  placeholder:
+                      (context, url) =>
+                          Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
@@ -283,7 +278,7 @@ class MovieList extends StatelessWidget {
 class TvSeriesList extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  const TvSeriesList(this.tvSeries, {Key? key}) : super(key: key);
+  const TvSeriesList(this.tvSeries, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -307,9 +302,9 @@ class TvSeriesList extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
                   imageUrl: '$baseImageUrl${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  placeholder:
+                      (context, url) =>
+                          Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),

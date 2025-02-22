@@ -9,14 +9,12 @@ import 'package:provider/provider.dart';
 class SearchPage extends StatelessWidget {
   static const routeName = '/search';
 
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search'),
-      ),
+      appBar: AppBar(title: Text('Search')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -24,8 +22,10 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<SearchNotifier>(context, listen: false)
-                    .fetchSearchResults(query);
+                Provider.of<SearchNotifier>(
+                  context,
+                  listen: false,
+                ).fetchSearchResults(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -35,16 +35,11 @@ class SearchPage extends StatelessWidget {
               textInputAction: TextInputAction.search,
             ),
             SizedBox(height: 16),
-            Text(
-              'Search Result',
-              style: kHeading6,
-            ),
+            Text('Search Result', style: kHeading6),
             Consumer<SearchNotifier>(
               builder: (context, data, child) {
                 if (data.state == RequestState.loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return Center(child: CircularProgressIndicator());
                 } else if (data.state == RequestState.loaded) {
                   final movies = data.movieSearchResult;
                   final tvSeries = data.tvSeriesSearchResult;
@@ -67,9 +62,7 @@ class SearchPage extends StatelessWidget {
                           Text('Movies', style: kHeading6),
                           Padding(
                             padding: const EdgeInsets.all(24.0),
-                            child: Center(
-                              child: Text('No movies found'),
-                            ),
+                            child: Center(child: Text('No movies found')),
                           ),
                         ],
                         if (tvSeries.isNotEmpty) ...[
@@ -87,9 +80,7 @@ class SearchPage extends StatelessWidget {
                           Text('TV Series', style: kHeading6),
                           Padding(
                             padding: const EdgeInsets.all(24.0),
-                            child: Center(
-                              child: Text('No TV series found'),
-                            ),
+                            child: Center(child: Text('No TV series found')),
                           ),
                         ],
                       ],
@@ -102,16 +93,12 @@ class SearchPage extends StatelessWidget {
                       Text('Movies', style: kHeading6),
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Center(
-                          child: Text('No movies found'),
-                        ),
+                        child: Center(child: Text('No movies found')),
                       ),
                       Text('TV Series', style: kHeading6),
                       Padding(
                         padding: const EdgeInsets.all(24.0),
-                        child: Center(
-                          child: Text('No TV series found'),
-                        ),
+                        child: Center(child: Text('No TV series found')),
                       ),
                     ],
                   );

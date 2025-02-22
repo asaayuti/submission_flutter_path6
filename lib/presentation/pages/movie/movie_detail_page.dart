@@ -13,7 +13,7 @@ class MovieDetailPage extends StatefulWidget {
   static const routeName = '/detail';
 
   final int id;
-  const MovieDetailPage({Key? key, required this.id}) : super(key: key);
+  const MovieDetailPage({super.key, required this.id});
 
   @override
   State<MovieDetailPage> createState() => _MovieDetailPageState();
@@ -25,10 +25,14 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       if (mounted) {
-        Provider.of<MovieDetailNotifier>(context, listen: false)
-            .fetchMovieDetail(widget.id);
-        Provider.of<MovieDetailNotifier>(context, listen: false)
-            .loadWatchlistStatus(widget.id);
+        Provider.of<MovieDetailNotifier>(
+          context,
+          listen: false,
+        ).fetchMovieDetail(widget.id);
+        Provider.of<MovieDetailNotifier>(
+          context,
+          listen: false,
+        ).loadWatchlistStatus(widget.id);
       }
     });
   }
@@ -39,9 +43,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
       body: Consumer<MovieDetailNotifier>(
         builder: (context, provider, child) {
           if (provider.movieState == RequestState.loading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(child: CircularProgressIndicator());
           } else if (provider.movieState == RequestState.loaded) {
             final movie = provider.movie;
             return SafeArea(
@@ -65,9 +67,12 @@ class DetailContent extends StatelessWidget {
   final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
-  const DetailContent(this.movie, this.recommendations, this.isAddedWatchlist,
-      {Key? key})
-      : super(key: key);
+  const DetailContent(
+    this.movie,
+    this.recommendations,
+    this.isAddedWatchlist, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +82,8 @@ class DetailContent extends StatelessWidget {
         CachedNetworkImage(
           imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
+          placeholder:
+              (context, url) => Center(child: CircularProgressIndicator()),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
         Container(
@@ -91,11 +95,7 @@ class DetailContent extends StatelessWidget {
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
+                padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
                 child: Stack(
                   children: [
                     Container(
@@ -105,15 +105,14 @@ class DetailContent extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              movie.title,
-                              style: kHeading5,
-                            ),
+                            Text(movie.title, style: kHeading5),
                             FilledButton(
                               onPressed: () async {
                                 final notifier =
-                                    Provider.of<MovieDetailNotifier>(context,
-                                        listen: false);
+                                    Provider.of<MovieDetailNotifier>(
+                                      context,
+                                      listen: false,
+                                    );
 
                                 if (!isAddedWatchlist) {
                                   await notifier.addWatchlist(movie);
@@ -157,39 +156,28 @@ class DetailContent extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Text(
-                              _showGenres(movie.genres),
-                            ),
-                            Text(
-                              _showDuration(movie.runtime),
-                            ),
+                            Text(_showGenres(movie.genres)),
+                            Text(_showDuration(movie.runtime)),
                             Row(
                               children: [
                                 RatingBarIndicator(
                                   rating: movie.voteAverage / 2,
                                   itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
+                                  itemBuilder:
+                                      (context, index) => Icon(
+                                        Icons.star,
+                                        color: kMikadoYellow,
+                                      ),
                                   itemSize: 24,
                                 ),
-                                Text('${movie.voteAverage}')
+                                Text('${movie.voteAverage}'),
                               ],
                             ),
                             SizedBox(height: 16),
-                            Text(
-                              'Overview',
-                              style: kHeading6,
-                            ),
-                            Text(
-                              movie.overview,
-                            ),
+                            Text('Overview', style: kHeading6),
+                            Text(movie.overview),
                             SizedBox(height: 16),
-                            Text(
-                              'Recommendations',
-                              style: kHeading6,
-                            ),
+                            Text('Recommendations', style: kHeading6),
                             Consumer<MovieDetailNotifier>(
                               builder: (context, data, child) {
                                 if (data.recommendationState ==
@@ -225,11 +213,11 @@ class DetailContent extends StatelessWidget {
                                               child: CachedNetworkImage(
                                                 imageUrl:
                                                     'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
+                                                placeholder:
+                                                    (context, url) => Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    ),
                                                 errorWidget:
                                                     (context, url, error) =>
                                                         Icon(Icons.error),
@@ -279,7 +267,7 @@ class DetailContent extends StatelessWidget {
               },
             ),
           ),
-        )
+        ),
       ],
     );
   }

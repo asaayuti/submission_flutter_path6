@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 class PopularMoviesPage extends StatefulWidget {
   static const routeName = '/popular-movie';
 
-  const PopularMoviesPage({Key? key}) : super(key: key);
+  const PopularMoviesPage({super.key});
 
   @override
   State<PopularMoviesPage> createState() => _PopularMoviesPageState();
@@ -19,8 +19,10 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
     super.initState();
     Future.microtask(() {
       if (mounted) {
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies();
+        Provider.of<PopularMoviesNotifier>(
+          context,
+          listen: false,
+        ).fetchPopularMovies();
       }
     });
   }
@@ -28,17 +30,13 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Popular Movies'),
-      ),
+      appBar: AppBar(title: Text('Popular Movies')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PopularMoviesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Center(child: CircularProgressIndicator());
             } else if (data.state == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
