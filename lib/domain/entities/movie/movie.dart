@@ -22,15 +22,15 @@ class Movie extends Equatable {
     required this.overview,
     required this.posterPath,
     required this.title,
-  })  : adult = false,
-        backdropPath = null,
-        genreIds = const [],
-        originalTitle = "",
-        popularity = 0.0,
-        releaseDate = "",
-        video = false,
-        voteAverage = 0.0,
-        voteCount = 0;
+  }) : adult = false,
+       backdropPath = null,
+       genreIds = const [],
+       originalTitle = "",
+       popularity = 0.0,
+       releaseDate = "",
+       video = false,
+       voteAverage = 0.0,
+       voteCount = 0;
 
   final bool? adult;
   final String? backdropPath;
@@ -48,18 +48,18 @@ class Movie extends Equatable {
 
   @override
   List<Object?> get props => [
-        adult,
-        backdropPath,
-        genreIds,
-        id,
-        originalTitle,
-        overview,
-        popularity,
-        posterPath,
-        releaseDate,
-        title,
-        video,
-        voteAverage,
-        voteCount,
-      ];
+    adult,
+    backdropPath,
+    genreIds,
+    id,
+    originalTitle,
+    overview,
+    popularity,
+    posterPath,
+    releaseDate,
+    title,
+    video,
+    voteAverage,
+    voteCount,
+  ];
 }

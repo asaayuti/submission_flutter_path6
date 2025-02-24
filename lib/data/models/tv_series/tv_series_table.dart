@@ -16,32 +16,32 @@ class TvSeriesTable extends Equatable {
   });
 
   factory TvSeriesTable.fromEntity(TvSeriesDetail tvSeries) => TvSeriesTable(
-        id: tvSeries.id,
-        name: tvSeries.name,
-        posterPath: tvSeries.posterPath,
-        overview: tvSeries.overview,
-      );
+    id: tvSeries.id,
+    name: tvSeries.name,
+    posterPath: tvSeries.posterPath,
+    overview: tvSeries.overview,
+  );
 
   factory TvSeriesTable.fromMap(Map<String, dynamic> map) => TvSeriesTable(
-        id: map['id'],
-        name: map['name'],
-        posterPath: map['posterPath'],
-        overview: map['overview'],
-      );
+    id: map['id'],
+    name: map['name'],
+    posterPath: map['posterPath'],
+    overview: map['overview'],
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'posterPath': posterPath,
-        'overview': overview,
-      };
+    'id': id,
+    'name': name,
+    'posterPath': posterPath,
+    'overview': overview,
+  };
 
   TvSeries toEntity() => TvSeries.watchlist(
-        id: id,
-        overview: overview,
-        posterPath: posterPath,
-        name: name,
-      );
+    id: id,
+    overview: overview,
+    posterPath: posterPath,
+    name: name,
+  );
 
   @override
   List<Object?> get props => [id, name, posterPath, overview];
