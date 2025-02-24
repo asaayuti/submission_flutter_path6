@@ -50,10 +50,10 @@ void main() {
 
   void arrangeUsecase() {
     when(
-      mockGetMovieDetail.execute(tId),
+      mockGetMovieDetail.execute(tMovieId),
     ).thenAnswer((_) async => Right(tMovieDetail));
     when(
-      mockGetMovieRecommendations.execute(tId),
+      mockGetMovieRecommendations.execute(tMovieId),
     ).thenAnswer((_) async => Right(tMovieList));
   }
 
@@ -62,17 +62,17 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(tMovieId);
       // assert
-      verify(mockGetMovieDetail.execute(tId));
-      verify(mockGetMovieRecommendations.execute(tId));
+      verify(mockGetMovieDetail.execute(tMovieId));
+      verify(mockGetMovieRecommendations.execute(tMovieId));
     });
 
     test('should change state to Loading when usecase is called', () {
       // arrange
       arrangeUsecase();
       // act
-      provider.fetchMovieDetail(tId);
+      provider.fetchMovieDetail(tMovieId);
       // assert
       expect(provider.movieState, RequestState.loading);
       expect(listenerCallCount, 1);
@@ -82,7 +82,7 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(tMovieId);
       // assert
       expect(provider.movieState, RequestState.loaded);
       expect(provider.movie, tMovieDetail);
@@ -95,7 +95,7 @@ void main() {
         // arrange
         arrangeUsecase();
         // act
-        await provider.fetchMovieDetail(tId);
+        await provider.fetchMovieDetail(tMovieId);
         // assert
         expect(provider.movieState, RequestState.loaded);
         expect(provider.movieRecommendations, tMovieList);
@@ -108,9 +108,9 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(tMovieId);
       // assert
-      verify(mockGetMovieRecommendations.execute(tId));
+      verify(mockGetMovieRecommendations.execute(tMovieId));
       expect(provider.movieRecommendations, tMovieList);
     });
 
@@ -120,7 +120,7 @@ void main() {
         // arrange
         arrangeUsecase();
         // act
-        await provider.fetchMovieDetail(tId);
+        await provider.fetchMovieDetail(tMovieId);
         // assert
         expect(provider.recommendationState, RequestState.loaded);
         expect(provider.movieRecommendations, tMovieList);
@@ -130,13 +130,13 @@ void main() {
     test('should update error message when request in successful', () async {
       // arrange
       when(
-        mockGetMovieDetail.execute(tId),
+        mockGetMovieDetail.execute(tMovieId),
       ).thenAnswer((_) async => Right(tMovieDetail));
       when(
-        mockGetMovieRecommendations.execute(tId),
+        mockGetMovieRecommendations.execute(tMovieId),
       ).thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(tMovieId);
       // assert
       expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
@@ -218,13 +218,13 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(
-        mockGetMovieDetail.execute(tId),
+        mockGetMovieDetail.execute(tMovieId),
       ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       when(
-        mockGetMovieRecommendations.execute(tId),
+        mockGetMovieRecommendations.execute(tMovieId),
       ).thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(tMovieId);
       // assert
       expect(provider.movieState, RequestState.error);
       expect(provider.message, 'Server Failure');

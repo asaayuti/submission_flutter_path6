@@ -79,19 +79,21 @@ void main() {
     test('should return Movie Detail Table when data is found', () async {
       // arrange
       when(
-        mockDatabaseHelper.getMovieById(tId),
+        mockDatabaseHelper.getMovieById(tMovieId),
       ).thenAnswer((_) async => tMovieMap);
       // act
-      final result = await dataSource.getMovieById(tId);
+      final result = await dataSource.getMovieById(tMovieId);
       // assert
       expect(result, tMovieTable);
     });
 
     test('should return null when data is not found', () async {
       // arrange
-      when(mockDatabaseHelper.getMovieById(tId)).thenAnswer((_) async => null);
+      when(
+        mockDatabaseHelper.getMovieById(tMovieId),
+      ).thenAnswer((_) async => null);
       // act
-      final result = await dataSource.getMovieById(tId);
+      final result = await dataSource.getMovieById(tMovieId);
       // assert
       expect(result, null);
     });

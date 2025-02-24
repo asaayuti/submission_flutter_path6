@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/usecases/movie/get_movie_recommendations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -21,12 +20,12 @@ void main() {
     () async {
       // arrange
       when(
-        mockMovieRepository.getMovieRecommendations(tId),
-      ).thenAnswer((_) async => Right(tMovies));
+        mockMovieRepository.getMovieRecommendations(tMovieId),
+      ).thenAnswer((_) async => Right(tEmtpyMovieList));
       // act
-      final result = await usecase.execute(tId);
+      final result = await usecase.execute(tMovieId);
       // assert
-      expect(result, Right(tMovies));
+      expect(result, Right(tEmtpyMovieList));
     },
   );
 }

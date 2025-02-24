@@ -18,10 +18,10 @@ void main() {
   test('should get movie detail from the repository', () async {
     // arrange
     when(
-      mockMovieRepository.getMovieDetail(tId),
+      mockMovieRepository.getMovieDetail(tMovieId),
     ).thenAnswer((_) async => Right(tMovieDetail));
     // act
-    final result = await usecase.execute(tId);
+    final result = await usecase.execute(tMovieId);
     // assert
     expect(result, Right(tMovieDetail));
   });

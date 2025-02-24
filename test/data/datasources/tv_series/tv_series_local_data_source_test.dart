@@ -82,10 +82,10 @@ void main() {
     test('should return Tv Series Detail Table when data is found', () async {
       // arrange
       when(
-        mockDatabaseHelper.getTvSeriesById(tId),
+        mockDatabaseHelper.getTvSeriesById(tMovieId),
       ).thenAnswer((_) async => testTvSeriesMap);
       // act
-      final result = await dataSource.getTvSeriesById(tId);
+      final result = await dataSource.getTvSeriesById(tMovieId);
       // assert
       expect(result, testTvSeriesTable);
     });
@@ -93,10 +93,10 @@ void main() {
     test('should return null when data is not found', () async {
       // arrange
       when(
-        mockDatabaseHelper.getTvSeriesById(tId),
+        mockDatabaseHelper.getTvSeriesById(tMovieId),
       ).thenAnswer((_) async => null);
       // act
-      final result = await dataSource.getTvSeriesById(tId);
+      final result = await dataSource.getTvSeriesById(tMovieId);
       // assert
       expect(result, null);
     });

@@ -51,10 +51,10 @@ void main() {
 
   void arrangeUsecase() {
     when(
-      mockGetTvSeriesDetail.execute(tId),
+      mockGetTvSeriesDetail.execute(tMovieId),
     ).thenAnswer((_) async => Right(testTvSeriesDetail));
     when(
-      mockGetTvSeriesRecommendations.execute(tId),
+      mockGetTvSeriesRecommendations.execute(tMovieId),
     ).thenAnswer((_) async => Right(testTvSeriesList));
   }
 
@@ -63,17 +63,17 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchTvSeriesDetail(tId);
+      await provider.fetchTvSeriesDetail(tMovieId);
       // assert
-      verify(mockGetTvSeriesDetail.execute(tId));
-      verify(mockGetTvSeriesRecommendations.execute(tId));
+      verify(mockGetTvSeriesDetail.execute(tMovieId));
+      verify(mockGetTvSeriesRecommendations.execute(tMovieId));
     });
 
     test('should change state to Loading when usecase is called', () {
       // arrange
       arrangeUsecase();
       // act
-      provider.fetchTvSeriesDetail(tId);
+      provider.fetchTvSeriesDetail(tMovieId);
       // assert
       expect(provider.tvSeriesState, RequestState.loading);
       expect(listenerCallCount, 1);
@@ -83,7 +83,7 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchTvSeriesDetail(tId);
+      await provider.fetchTvSeriesDetail(tMovieId);
       // assert
       expect(provider.tvSeriesState, RequestState.loaded);
       expect(provider.tvSeries, testTvSeriesDetail);
@@ -96,7 +96,7 @@ void main() {
         // arrange
         arrangeUsecase();
         // act
-        await provider.fetchTvSeriesDetail(tId);
+        await provider.fetchTvSeriesDetail(tMovieId);
         // assert
         expect(provider.tvSeriesState, RequestState.loaded);
         expect(provider.tvSeriesRecommendations, testTvSeriesList);
@@ -109,9 +109,9 @@ void main() {
       // arrange
       arrangeUsecase();
       // act
-      await provider.fetchTvSeriesDetail(tId);
+      await provider.fetchTvSeriesDetail(tMovieId);
       // assert
-      verify(mockGetTvSeriesRecommendations.execute(tId));
+      verify(mockGetTvSeriesRecommendations.execute(tMovieId));
       expect(provider.tvSeriesRecommendations, testTvSeriesList);
     });
 
@@ -121,7 +121,7 @@ void main() {
         // arrange
         arrangeUsecase();
         // act
-        await provider.fetchTvSeriesDetail(tId);
+        await provider.fetchTvSeriesDetail(tMovieId);
         // assert
         expect(provider.recommendationState, RequestState.loaded);
         expect(provider.tvSeriesRecommendations, testTvSeriesList);
@@ -131,13 +131,13 @@ void main() {
     test('should update error message when request in successful', () async {
       // arrange
       when(
-        mockGetTvSeriesDetail.execute(tId),
+        mockGetTvSeriesDetail.execute(tMovieId),
       ).thenAnswer((_) async => Right(testTvSeriesDetail));
       when(
-        mockGetTvSeriesRecommendations.execute(tId),
+        mockGetTvSeriesRecommendations.execute(tMovieId),
       ).thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
-      await provider.fetchTvSeriesDetail(tId);
+      await provider.fetchTvSeriesDetail(tMovieId);
       // assert
       expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
@@ -219,13 +219,13 @@ void main() {
     test('should return error when data is unsuccessful', () async {
       // arrange
       when(
-        mockGetTvSeriesDetail.execute(tId),
+        mockGetTvSeriesDetail.execute(tMovieId),
       ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       when(
-        mockGetTvSeriesRecommendations.execute(tId),
+        mockGetTvSeriesRecommendations.execute(tMovieId),
       ).thenAnswer((_) async => Right(testTvSeriesList));
       // act
-      await provider.fetchTvSeriesDetail(tId);
+      await provider.fetchTvSeriesDetail(tMovieId);
       // assert
       expect(provider.tvSeriesState, RequestState.error);
       expect(provider.message, 'Server Failure');

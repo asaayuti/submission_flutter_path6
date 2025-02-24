@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/movie/movie.dart';
 import 'package:ditonton/domain/usecases/movie/get_popular_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -24,11 +23,11 @@ void main() {
           // arrange
           when(
             mockMovieRpository.getPopularMovies(),
-          ).thenAnswer((_) async => Right(tMovies));
+          ).thenAnswer((_) async => Right(tEmtpyMovieList));
           // act
           final result = await usecase.execute();
           // assert
-          expect(result, Right(tMovies));
+          expect(result, Right(tEmtpyMovieList));
         },
       );
     });

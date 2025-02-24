@@ -128,7 +128,7 @@ void main() {
   });
 
   group('get tvSeries detail', () {
-    final endpoint = '$baseUrl/tv/$tId?$apiKey';
+    final endpoint = '$baseUrl/tv/$tMovieId?$apiKey';
     final jsonPath = 'dummy_data/tv_series/tv_series_detail.json';
     final tTvSeriesDetail = TvSeriesDetailResponse.fromJson(
       json.decode(readJson(jsonPath)),
@@ -142,7 +142,7 @@ void main() {
           mockHttpClient.get(Uri.parse(endpoint)),
         ).thenAnswer((_) async => http.Response(readJson(jsonPath), 200));
         // act
-        final result = await dataSource.getTvSeriesDetail(tId);
+        final result = await dataSource.getTvSeriesDetail(tMovieId);
         // assert
         expect(result, equals(tTvSeriesDetail));
       },
@@ -157,7 +157,7 @@ void main() {
         ).thenAnswer((_) async => http.Response('Not Found', 404));
         // act & assert
         expect(
-          () async => await dataSource.getTvSeriesDetail(tId),
+          () async => await dataSource.getTvSeriesDetail(tMovieId),
           throwsA(isA<ServerException>()),
         );
       },
@@ -165,7 +165,7 @@ void main() {
   });
 
   group('get tvSeries recommendations', () {
-    final endpoint = '$baseUrl/tv/$tId/recommendations?$apiKey';
+    final endpoint = '$baseUrl/tv/$tMovieId/recommendations?$apiKey';
     final jsonPath = 'dummy_data/tv_series/tv_series_recommendations.json';
     final tTvSeriesList =
         TvSeriesResponse.fromJson(json.decode(readJson(jsonPath))).tvSeriesList;
@@ -178,7 +178,7 @@ void main() {
           mockHttpClient.get(Uri.parse(endpoint)),
         ).thenAnswer((_) async => http.Response(readJson(jsonPath), 200));
         // act
-        final result = await dataSource.getTvSeriesRecommendations(tId);
+        final result = await dataSource.getTvSeriesRecommendations(tMovieId);
         // assert
         expect(result, equals(tTvSeriesList));
       },
@@ -193,7 +193,7 @@ void main() {
         ).thenAnswer((_) async => http.Response('Not Found', 404));
         // act & assert
         expect(
-          () async => await dataSource.getTvSeriesRecommendations(tId),
+          () async => await dataSource.getTvSeriesRecommendations(tMovieId),
           throwsA(isA<ServerException>()),
         );
       },

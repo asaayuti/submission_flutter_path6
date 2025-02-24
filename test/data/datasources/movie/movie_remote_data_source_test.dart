@@ -128,7 +128,7 @@ void main() {
   });
 
   group('get movie detail', () {
-    final endpoint = '$baseUrl/movie/$tId?$apiKey';
+    final endpoint = '$baseUrl/movie/$tMovieId?$apiKey';
     final jsonPath = 'dummy_data/movie/movie_detail.json';
     final tMovieDetail = MovieDetailResponse.fromJson(
       json.decode(readJson(jsonPath)),
@@ -140,7 +140,7 @@ void main() {
         mockHttpClient.get(Uri.parse(endpoint)),
       ).thenAnswer((_) async => http.Response(readJson(jsonPath), 200));
       // act
-      final result = await dataSource.getMovieDetail(tId);
+      final result = await dataSource.getMovieDetail(tMovieId);
       // assert
       expect(result, equals(tMovieDetail));
     });
@@ -154,7 +154,7 @@ void main() {
         ).thenAnswer((_) async => http.Response('Not Found', 404));
         // act & assert
         expect(
-          () async => await dataSource.getMovieDetail(tId),
+          () async => await dataSource.getMovieDetail(tMovieId),
           throwsA(isA<ServerException>()),
         );
       },
@@ -162,7 +162,7 @@ void main() {
   });
 
   group('get movie recommendations', () {
-    final endpoint = '$baseUrl/movie/$tId/recommendations?$apiKey';
+    final endpoint = '$baseUrl/movie/$tMovieId/recommendations?$apiKey';
     final jsonPath = 'dummy_data/movie/movie_recommendations.json';
     final tMovieList =
         MovieResponse.fromJson(json.decode(readJson(jsonPath))).movieList;
@@ -175,7 +175,7 @@ void main() {
           mockHttpClient.get(Uri.parse(endpoint)),
         ).thenAnswer((_) async => http.Response(readJson(jsonPath), 200));
         // act
-        final result = await dataSource.getMovieRecommendations(tId);
+        final result = await dataSource.getMovieRecommendations(tMovieId);
         // assert
         expect(result, equals(tMovieList));
       },
@@ -190,7 +190,7 @@ void main() {
         ).thenAnswer((_) async => http.Response('Not Found', 404));
         // act & assert
         expect(
-          () async => await dataSource.getMovieRecommendations(tId),
+          () async => await dataSource.getMovieRecommendations(tMovieId),
           throwsA(isA<ServerException>()),
         );
       },

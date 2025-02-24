@@ -184,12 +184,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getMovieDetail(tId),
+          mockRemoteDataSource.getMovieDetail(tMovieId),
         ).thenAnswer((_) async => tMovieDetailResponse);
         // act
-        final result = await repository.getMovieDetail(tId);
+        final result = await repository.getMovieDetail(tMovieId);
         // assert
-        verify(mockRemoteDataSource.getMovieDetail(tId));
+        verify(mockRemoteDataSource.getMovieDetail(tMovieId));
         expect(result, equals(Right(tMovieDetail)));
       },
     );
@@ -199,12 +199,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getMovieDetail(tId),
+          mockRemoteDataSource.getMovieDetail(tMovieId),
         ).thenThrow(ServerException());
         // act
-        final result = await repository.getMovieDetail(tId);
+        final result = await repository.getMovieDetail(tMovieId);
         // assert
-        verify(mockRemoteDataSource.getMovieDetail(tId));
+        verify(mockRemoteDataSource.getMovieDetail(tMovieId));
         expect(
           result,
           equals(Left(ServerFailure('Failed to fetch data from server'))),
@@ -217,12 +217,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getMovieDetail(tId),
+          mockRemoteDataSource.getMovieDetail(tMovieId),
         ).thenThrow(SocketException('Failed to connect to the network'));
         // act
-        final result = await repository.getMovieDetail(tId);
+        final result = await repository.getMovieDetail(tMovieId);
         // assert
-        verify(mockRemoteDataSource.getMovieDetail(tId));
+        verify(mockRemoteDataSource.getMovieDetail(tMovieId));
         expect(
           result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))),
@@ -237,12 +237,12 @@ void main() {
     test('should return data (movie list) when the call is successful', () async {
       // arrange
       when(
-        mockRemoteDataSource.getMovieRecommendations(tId),
+        mockRemoteDataSource.getMovieRecommendations(tMovieId),
       ).thenAnswer((_) async => tMovieList);
       // act
-      final result = await repository.getMovieRecommendations(tId);
+      final result = await repository.getMovieRecommendations(tMovieId);
       // assert
-      verify(mockRemoteDataSource.getMovieRecommendations(tId));
+      verify(mockRemoteDataSource.getMovieRecommendations(tMovieId));
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
       final resultList = result.getOrElse(() => []);
       expect(resultList, equals(tMovieList));
@@ -253,12 +253,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getMovieRecommendations(tId),
+          mockRemoteDataSource.getMovieRecommendations(tMovieId),
         ).thenThrow(ServerException());
         // act
-        final result = await repository.getMovieRecommendations(tId);
+        final result = await repository.getMovieRecommendations(tMovieId);
         // assertbuild runner
-        verify(mockRemoteDataSource.getMovieRecommendations(tId));
+        verify(mockRemoteDataSource.getMovieRecommendations(tMovieId));
         expect(
           result,
           equals(Left(ServerFailure('Failed to fetch data from server'))),
@@ -271,12 +271,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getMovieRecommendations(tId),
+          mockRemoteDataSource.getMovieRecommendations(tMovieId),
         ).thenThrow(SocketException('Failed to connect to the network'));
         // act
-        final result = await repository.getMovieRecommendations(tId);
+        final result = await repository.getMovieRecommendations(tMovieId);
         // assert
-        verify(mockRemoteDataSource.getMovieRecommendations(tId));
+        verify(mockRemoteDataSource.getMovieRecommendations(tMovieId));
         expect(
           result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))),
@@ -385,9 +385,11 @@ void main() {
   group('get watchlist status', () {
     test('should return watch status whether data is found', () async {
       // arrange
-      when(mockLocalDataSource.getMovieById(tId)).thenAnswer((_) async => null);
+      when(
+        mockLocalDataSource.getMovieById(tMovieId),
+      ).thenAnswer((_) async => null);
       // act
-      final result = await repository.isAddedToWatchlist(tId);
+      final result = await repository.isAddedToWatchlist(tMovieId);
       // assert
       expect(result, false);
     });

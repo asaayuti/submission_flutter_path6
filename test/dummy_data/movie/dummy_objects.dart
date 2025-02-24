@@ -44,8 +44,9 @@ final tMovieModelList = <MovieModel>[tMovieModel];
 final tMovieList = <Movie>[tMovie];
 
 final tQuery = 'spiderman';
-final tId = 1;
-final tMovies = <Movie>[];
+final tMovieId = 1;
+
+final tEmtpyMovieList = <Movie>[];
 
 final tMovieDetailResponse = MovieDetailResponse(
   adult: false,
