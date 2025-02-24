@@ -21,11 +21,11 @@ void main() {
       // arrange
       when(
         mockMovieRepository.getMovieRecommendations(tMovieId),
-      ).thenAnswer((_) async => Right(tEmtpyMovieList));
+      ).thenAnswer((_) async => Right(tEmptyMovieList));
       // act
       final result = await usecase.execute(tMovieId);
       // assert
-      expect(result, Right(tEmtpyMovieList));
+      expect(result, Right(tEmptyMovieList));
     },
   );
 }

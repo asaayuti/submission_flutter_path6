@@ -23,11 +23,11 @@ void main() {
           // arrange
           when(
             mockMovieRpository.getPopularMovies(),
-          ).thenAnswer((_) async => Right(tEmtpyMovieList));
+          ).thenAnswer((_) async => Right(tEmptyMovieList));
           // act
           final result = await usecase.execute();
           // assert
-          expect(result, Right(tEmtpyMovieList));
+          expect(result, Right(tEmptyMovieList));
         },
       );
     });

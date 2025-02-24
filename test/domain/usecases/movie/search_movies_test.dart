@@ -19,10 +19,10 @@ void main() {
     // arrange
     when(
       mockMovieRepository.searchMovies(tQuery),
-    ).thenAnswer((_) async => Right(tEmtpyMovieList));
+    ).thenAnswer((_) async => Right(tEmptyMovieList));
     // act
     final result = await usecase.execute(tQuery);
     // assert
-    expect(result, Right(tEmtpyMovieList));
+    expect(result, Right(tEmptyMovieList));
   });
 }

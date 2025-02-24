@@ -236,14 +236,14 @@ void main() {
       // arrange
       when(
         mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId),
-      ).thenAnswer((_) async => tEmptyTvSeriesList);
+      ).thenAnswer((_) async => tEmptyTvSeriesModelList);
       // act
       final result = await repository.getTvSeriesRecommendations(tTvSeriesId);
       // assert
       verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId));
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
       final resultList = result.getOrElse(() => []);
-      expect(resultList, equals(tEmptyTvSeriesList));
+      expect(resultList, equals(tEmptyTvSeriesModelList));
     });
 
     test(

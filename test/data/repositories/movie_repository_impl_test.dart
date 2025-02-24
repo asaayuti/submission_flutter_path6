@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/models/movie/movie_model.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
@@ -232,20 +231,18 @@ void main() {
   });
 
   group('Get Movie Recommendations', () {
-    final tMovieList = <MovieModel>[];
-
     test('should return data (movie list) when the call is successful', () async {
       // arrange
       when(
         mockRemoteDataSource.getMovieRecommendations(tMovieId),
-      ).thenAnswer((_) async => tMovieList);
+      ).thenAnswer((_) async => tEmptyMovieModelList);
       // act
       final result = await repository.getMovieRecommendations(tMovieId);
       // assert
       verify(mockRemoteDataSource.getMovieRecommendations(tMovieId));
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
       final resultList = result.getOrElse(() => []);
-      expect(resultList, equals(tMovieList));
+      expect(resultList, equals(tEmptyMovieModelList));
     });
 
     test(

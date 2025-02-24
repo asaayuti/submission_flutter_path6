@@ -47,7 +47,8 @@ final tTvSeriesList = <TvSeries>[tTvSeries];
 
 final tTvSeriesId = 1;
 
-final tEmptyTvSeriesList = <TvSeriesModel>[];
+final tEmptyTvSeriesList = <TvSeries>[];
+final tEmptyTvSeriesModelList = <TvSeriesModel>[];
 
 final tTvSeriesDetailResponse = TvSeriesDetailResponse(
   adult: false,
