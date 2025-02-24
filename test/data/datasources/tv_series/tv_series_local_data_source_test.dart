@@ -24,10 +24,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockDatabaseHelper.insertWatchlistTvSeries(testTvSeriesTable),
+          mockDatabaseHelper.insertWatchlistTvSeries(tTvSeriesTable),
         ).thenAnswer((_) async => 1);
         // act
-        final result = await dataSource.insertWatchlist(testTvSeriesTable);
+        final result = await dataSource.insertWatchlist(tTvSeriesTable);
         // assert
         expect(result, 'Added TV Series to Watchlist');
       },
@@ -38,10 +38,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockDatabaseHelper.insertWatchlistTvSeries(testTvSeriesTable),
+          mockDatabaseHelper.insertWatchlistTvSeries(tTvSeriesTable),
         ).thenThrow(Exception());
         // act
-        final call = dataSource.insertWatchlist(testTvSeriesTable);
+        final call = dataSource.insertWatchlist(tTvSeriesTable);
         // assert
         expect(() => call, throwsA(isA<DatabaseException>()));
       },
@@ -54,10 +54,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockDatabaseHelper.removeWatchlistTvSeries(testTvSeriesTable),
+          mockDatabaseHelper.removeWatchlistTvSeries(tTvSeriesTable),
         ).thenAnswer((_) async => 1);
         // act
-        final result = await dataSource.removeWatchlist(testTvSeriesTable);
+        final result = await dataSource.removeWatchlist(tTvSeriesTable);
         // assert
         expect(result, 'Removed TV Series from Watchlist');
       },
@@ -68,10 +68,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockDatabaseHelper.removeWatchlistTvSeries(testTvSeriesTable),
+          mockDatabaseHelper.removeWatchlistTvSeries(tTvSeriesTable),
         ).thenThrow(Exception());
         // act
-        final call = dataSource.removeWatchlist(testTvSeriesTable);
+        final call = dataSource.removeWatchlist(tTvSeriesTable);
         // assert
         expect(() => call, throwsA(isA<DatabaseException>()));
       },
@@ -83,11 +83,11 @@ void main() {
       // arrange
       when(
         mockDatabaseHelper.getTvSeriesById(tMovieId),
-      ).thenAnswer((_) async => testTvSeriesMap);
+      ).thenAnswer((_) async => tTvSeriesMap);
       // act
       final result = await dataSource.getTvSeriesById(tMovieId);
       // assert
-      expect(result, testTvSeriesTable);
+      expect(result, tTvSeriesTable);
     });
 
     test('should return null when data is not found', () async {
@@ -107,11 +107,11 @@ void main() {
       // arrange
       when(
         mockDatabaseHelper.getWatchlistTvSeries(),
-      ).thenAnswer((_) async => [testTvSeriesMap]);
+      ).thenAnswer((_) async => [tTvSeriesMap]);
       // act
       final result = await dataSource.getWatchlistTvSeries();
       // assert
-      expect(result, [testTvSeriesTable]);
+      expect(result, [tTvSeriesTable]);
     });
   });
 }

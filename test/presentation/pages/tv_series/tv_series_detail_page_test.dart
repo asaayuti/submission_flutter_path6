@@ -30,7 +30,7 @@ void main() {
     'Watchlist button should display add icon when tvSeries not added to watchlist',
     (WidgetTester tester) async {
       when(mockNotifier.tvSeriesState).thenReturn(RequestState.loaded);
-      when(mockNotifier.tvSeries).thenReturn(testTvSeriesDetail);
+      when(mockNotifier.tvSeries).thenReturn(tTvSeriesDetail);
       when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
       when(mockNotifier.tvSeriesRecommendations).thenReturn(<TvSeries>[]);
       when(mockNotifier.isAddedToWatchlist).thenReturn(false);
@@ -47,7 +47,7 @@ void main() {
     'Watchlist button should dispay check icon when tvSeries is added to wathclist',
     (WidgetTester tester) async {
       when(mockNotifier.tvSeriesState).thenReturn(RequestState.loaded);
-      when(mockNotifier.tvSeries).thenReturn(testTvSeriesDetail);
+      when(mockNotifier.tvSeries).thenReturn(tTvSeriesDetail);
       when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
       when(mockNotifier.tvSeriesRecommendations).thenReturn(<TvSeries>[]);
       when(mockNotifier.isAddedToWatchlist).thenReturn(true);
@@ -64,7 +64,7 @@ void main() {
     'Watchlist button should display Snackbar when added to watchlist',
     (WidgetTester tester) async {
       when(mockNotifier.tvSeriesState).thenReturn(RequestState.loaded);
-      when(mockNotifier.tvSeries).thenReturn(testTvSeriesDetail);
+      when(mockNotifier.tvSeries).thenReturn(tTvSeriesDetail);
       when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
       when(mockNotifier.tvSeriesRecommendations).thenReturn(<TvSeries>[]);
       when(mockNotifier.isAddedToWatchlist).thenReturn(false);
@@ -90,7 +90,7 @@ void main() {
     'Watchlist button should display AlertDialog when add to watchlist failed',
     (WidgetTester tester) async {
       when(mockNotifier.tvSeriesState).thenReturn(RequestState.loaded);
-      when(mockNotifier.tvSeries).thenReturn(testTvSeriesDetail);
+      when(mockNotifier.tvSeries).thenReturn(tTvSeriesDetail);
       when(mockNotifier.recommendationState).thenReturn(RequestState.loaded);
       when(mockNotifier.tvSeriesRecommendations).thenReturn(<TvSeries>[]);
       when(mockNotifier.isAddedToWatchlist).thenReturn(false);

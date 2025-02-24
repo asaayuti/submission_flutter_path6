@@ -39,7 +39,7 @@ void main() {
       ).thenAnswer((_) async => Right(tMovieList));
       when(
         mockSearchTvSeries.execute(tQuery),
-      ).thenAnswer((_) async => Right(testTvSeriesList));
+      ).thenAnswer((_) async => Right(tTvSeriesList));
       // act
       provider.fetchSearchResults(tQuery);
       // assert
@@ -55,13 +55,13 @@ void main() {
         ).thenAnswer((_) async => Right(tMovieList));
         when(
           mockSearchTvSeries.execute(tQuery),
-        ).thenAnswer((_) async => Right(testTvSeriesList));
+        ).thenAnswer((_) async => Right(tTvSeriesList));
         // act
         await provider.fetchSearchResults(tQuery);
         // assert
         expect(provider.state, RequestState.loaded);
         expect(provider.movieSearchResult, tMovieList);
-        expect(provider.tvSeriesSearchResult, testTvSeriesList);
+        expect(provider.tvSeriesSearchResult, tTvSeriesList);
         expect(listenerCallCount, 2);
       },
     );

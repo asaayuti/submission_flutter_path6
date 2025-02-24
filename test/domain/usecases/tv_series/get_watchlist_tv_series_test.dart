@@ -19,10 +19,10 @@ void main() {
     // arrange
     when(
       mockTvSeriesRepository.getWatchlistTvSeries(),
-    ).thenAnswer((_) async => Right(testTvSeriesList));
+    ).thenAnswer((_) async => Right(tTvSeriesList));
     // act
     final result = await usecase.execute();
     // assert
-    expect(result, Right(testTvSeriesList));
+    expect(result, Right(tTvSeriesList));
   });
 }

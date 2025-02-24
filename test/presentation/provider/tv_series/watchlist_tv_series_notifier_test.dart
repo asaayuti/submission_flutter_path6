@@ -32,12 +32,12 @@ void main() {
       // arrange
       when(
         mockGetWatchlistTvSeries.execute(),
-      ).thenAnswer((_) async => Right([testWatchlistTvSeries]));
+      ).thenAnswer((_) async => Right([tWatchlistTvSeries]));
       // act
       await provider.fetchWatchlistTvSeries();
       // assert
       expect(provider.watchlistState, RequestState.loaded);
-      expect(provider.watchlistTvSeries, [testWatchlistTvSeries]);
+      expect(provider.watchlistTvSeries, [tWatchlistTvSeries]);
       expect(listenerCallCount, 2);
     },
   );

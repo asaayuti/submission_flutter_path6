@@ -336,10 +336,10 @@ void main() {
     test('should return success message when saving successful', () async {
       // arrange
       when(
-        mockLocalDataSource.insertWatchlist(testTvSeriesTable),
+        mockLocalDataSource.insertWatchlist(tTvSeriesTable),
       ).thenAnswer((_) async => 'Added TV Series to Watchlist');
       // act
-      final result = await repository.saveWatchlist(testTvSeriesDetail);
+      final result = await repository.saveWatchlist(tTvSeriesDetail);
       // assert
       expect(result, Right('Added TV Series to Watchlist'));
     });
@@ -347,10 +347,10 @@ void main() {
     test('should return DatabaseFailure when saving unsuccessful', () async {
       // arrange
       when(
-        mockLocalDataSource.insertWatchlist(testTvSeriesTable),
+        mockLocalDataSource.insertWatchlist(tTvSeriesTable),
       ).thenThrow(DatabaseException('Failed to TV Series add watchlist'));
       // act
-      final result = await repository.saveWatchlist(testTvSeriesDetail);
+      final result = await repository.saveWatchlist(tTvSeriesDetail);
       // assert
       expect(
         result,
@@ -363,10 +363,10 @@ void main() {
     test('should return success message when remove successful', () async {
       // arrange
       when(
-        mockLocalDataSource.removeWatchlist(testTvSeriesTable),
+        mockLocalDataSource.removeWatchlist(tTvSeriesTable),
       ).thenAnswer((_) async => 'Removed TV Series from watchlist');
       // act
-      final result = await repository.removeWatchlist(testTvSeriesDetail);
+      final result = await repository.removeWatchlist(tTvSeriesDetail);
       // assert
       expect(result, Right('Removed TV Series from watchlist'));
     });
@@ -374,10 +374,10 @@ void main() {
     test('should return DatabaseFailure when remove unsuccessful', () async {
       // arrange
       when(
-        mockLocalDataSource.removeWatchlist(testTvSeriesTable),
+        mockLocalDataSource.removeWatchlist(tTvSeriesTable),
       ).thenThrow(DatabaseException('Failed to TV Series remove watchlist'));
       // act
-      final result = await repository.removeWatchlist(testTvSeriesDetail);
+      final result = await repository.removeWatchlist(tTvSeriesDetail);
       // assert
       expect(
         result,
@@ -404,12 +404,12 @@ void main() {
       // arrange
       when(
         mockLocalDataSource.getWatchlistTvSeries(),
-      ).thenAnswer((_) async => [testTvSeriesTable]);
+      ).thenAnswer((_) async => [tTvSeriesTable]);
       // act
       final result = await repository.getWatchlistTvSeries();
       // assert
       final resultList = result.getOrElse(() => []);
-      expect(resultList, [testWatchlistTvSeries]);
+      expect(resultList, [tWatchlistTvSeries]);
     });
   });
 }
