@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
+import '../../../dummy_data/movie/dummy_objects.dart';
 import '../../../json_reader.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
@@ -127,7 +128,6 @@ void main() {
   });
 
   group('get tvSeries detail', () {
-    final tId = 1;
     final endpoint = '$baseUrl/tv/$tId?$apiKey';
     final jsonPath = 'dummy_data/tv_series/tv_series_detail.json';
     final tTvSeriesDetail = TvSeriesDetailResponse.fromJson(
@@ -165,7 +165,6 @@ void main() {
   });
 
   group('get tvSeries recommendations', () {
-    final tId = 1;
     final endpoint = '$baseUrl/tv/$tId/recommendations?$apiKey';
     final jsonPath = 'dummy_data/tv_series/tv_series_recommendations.json';
     final tTvSeriesList =
@@ -202,7 +201,6 @@ void main() {
   });
 
   group('search tvSeriess', () {
-    final tQuery = 'Spiderman';
     final endpoint = '$baseUrl/search/tv?$apiKey&query=$tQuery';
     final jsonPath = 'dummy_data/tv_series/search_spiderman_tv_series.json';
     final tSearchResult =

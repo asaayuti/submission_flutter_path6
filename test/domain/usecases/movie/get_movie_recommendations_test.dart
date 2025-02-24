@@ -4,6 +4,7 @@ import 'package:ditonton/domain/usecases/movie/get_movie_recommendations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../dummy_data/movie/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -15,17 +16,17 @@ void main() {
     usecase = GetMovieRecommendations(mockMovieRepository);
   });
 
-  final tId = 1;
-  final tMovies = <Movie>[];
-
-  test('should get list of movie recommendations from the repository',
-      () async {
-    // arrange
-    when(mockMovieRepository.getMovieRecommendations(tId))
-        .thenAnswer((_) async => Right(tMovies));
-    // act
-    final result = await usecase.execute(tId);
-    // assert
-    expect(result, Right(tMovies));
-  });
+  test(
+    'should get list of movie recommendations from the repository',
+    () async {
+      // arrange
+      when(
+        mockMovieRepository.getMovieRecommendations(tId),
+      ).thenAnswer((_) async => Right(tMovies));
+      // act
+      final result = await usecase.execute(tId);
+      // assert
+      expect(result, Right(tMovies));
+    },
+  );
 }

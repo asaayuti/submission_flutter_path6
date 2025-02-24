@@ -3,7 +3,7 @@ import 'package:ditonton/domain/usecases/movie/get_watchlist_movies.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
+import '../../../dummy_data/movie/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -17,11 +17,12 @@ void main() {
 
   test('should get list of movies from the repository', () async {
     // arrange
-    when(mockMovieRepository.getWatchlistMovies())
-        .thenAnswer((_) async => Right(testMovieList));
+    when(
+      mockMovieRepository.getWatchlistMovies(),
+    ).thenAnswer((_) async => Right(tMovieList));
     // act
     final result = await usecase.execute();
     // assert
-    expect(result, Right(testMovieList));
+    expect(result, Right(tMovieList));
   });
 }

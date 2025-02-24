@@ -19,66 +19,72 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     required this.localDataSource,
   });
 
-  @override
-  Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries() async {
+  Future<Either<Failure, T>> handleRemoteRequest<T>(
+    Future<T> Function() request,
+  ) async {
     try {
-      final result = await remoteDataSource.getNowPlayingTvSeries();
-      return Right(result.map((model) => model.toEntity()).toList());
+      final result = await request();
+      return Right(result);
     } on ServerException {
-      return Left(ServerFailure(''));
+      return Left(ServerFailure('Failed to fetch data from server'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 
-  @override
-  Future<Either<Failure, List<TvSeries>>> getPopularTvSeries() async {
+  Future<Either<Failure, String>> handleLocalRequest(
+    Future<String> Function() request,
+  ) async {
     try {
-      final result = await remoteDataSource.getPopularTvSeries();
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
+      final result = await request();
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries() async {
-    try {
-      final result = await remoteDataSource.getTopRatedTvSeries();
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
+  Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries() async =>
+      handleRemoteRequest(
+        () async =>
+            (await remoteDataSource.getNowPlayingTvSeries())
+                .map((model) => model.toEntity())
+                .toList(),
+      );
 
   @override
-  Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id) async {
-    try {
-      final result = await remoteDataSource.getTvSeriesDetail(id);
-      return Right(result.toEntity());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
+  Future<Either<Failure, List<TvSeries>>> getPopularTvSeries() async =>
+      handleRemoteRequest(
+        () async =>
+            (await remoteDataSource.getPopularTvSeries())
+                .map((model) => model.toEntity())
+                .toList(),
+      );
+
+  @override
+  Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries() async =>
+      handleRemoteRequest(
+        () async =>
+            (await remoteDataSource.getTopRatedTvSeries())
+                .map((model) => model.toEntity())
+                .toList(),
+      );
+
+  @override
+  Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id) async =>
+      handleRemoteRequest(
+        () async => (await remoteDataSource.getTvSeriesDetail(id)).toEntity(),
+      );
 
   @override
   Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendations(
-      int id) async {
-    try {
-      final result = await remoteDataSource.getTvSeriesRecommendations(id);
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
+    int id,
+  ) async => handleRemoteRequest(
+    () async =>
+        (await remoteDataSource.getTvSeriesRecommendations(
+          id,
+        )).map((model) => model.toEntity()).toList(),
+  );
 
   @override
   Future<Either<Failure, List<TvSeries>>> getWatchlistTvSeries() async {
@@ -87,45 +93,29 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<bool> isAddedToWatchlist(int id) async {
-    final result = await localDataSource.getTvSeriesById(id);
-    return result != null;
-  }
+  Future<bool> isAddedToWatchlist(int id) async =>
+      (await localDataSource.getTvSeriesById(id)) != null;
 
   @override
   Future<Either<Failure, String>> removeWatchlist(
-      TvSeriesDetail tvSeries) async {
-    try {
-      final result = await localDataSource
-          .removeWatchlist(TvSeriesTable.fromEntity(tvSeries));
-      return Right(result);
-    } on DatabaseException catch (e) {
-      return Left(DatabaseFailure(e.message));
-    }
-  }
+    TvSeriesDetail tvSeries,
+  ) async => handleLocalRequest(
+    () => localDataSource.removeWatchlist(TvSeriesTable.fromEntity(tvSeries)),
+  );
 
   @override
-  Future<Either<Failure, String>> saveWatchlist(TvSeriesDetail tvSeries) async {
-    try {
-      final result = await localDataSource
-          .insertWatchlist(TvSeriesTable.fromEntity(tvSeries));
-      return Right(result);
-    } on DatabaseException catch (e) {
-      return Left(DatabaseFailure(e.message));
-    } catch (e) {
-      rethrow;
-    }
-  }
+  Future<Either<Failure, String>> saveWatchlist(
+    TvSeriesDetail tvSeries,
+  ) async => handleLocalRequest(
+    () => localDataSource.insertWatchlist(TvSeriesTable.fromEntity(tvSeries)),
+  );
 
   @override
-  Future<Either<Failure, List<TvSeries>>> searchTvSeries(String query) async {
-    try {
-      final result = await remoteDataSource.searchTvSeries(query);
-      return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
-    } on SocketException {
-      return Left(ConnectionFailure('Failed to connect to the network'));
-    }
-  }
+  Future<Either<Failure, List<TvSeries>>> searchTvSeries(String query) async =>
+      handleRemoteRequest(
+        () async =>
+            (await remoteDataSource.searchTvSeries(
+              query,
+            )).map((model) => model.toEntity()).toList(),
+      );
 }

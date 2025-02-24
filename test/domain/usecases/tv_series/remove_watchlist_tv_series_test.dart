@@ -3,7 +3,7 @@ import 'package:ditonton/domain/usecases/tv_series/remove_watchlist_tv_series.da
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
+import '../../../dummy_data/tv_series/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -17,8 +17,9 @@ void main() {
 
   test('should remove watchlist tv series from repository', () async {
     // arrange
-    when(mockTvSeriesRepository.removeWatchlist(testTvSeriesDetail))
-        .thenAnswer((_) async => Right('Removed from watchlist'));
+    when(
+      mockTvSeriesRepository.removeWatchlist(testTvSeriesDetail),
+    ).thenAnswer((_) async => Right('Removed from watchlist'));
     // act
     final result = await usecase.execute(testTvSeriesDetail);
     // assert

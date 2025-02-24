@@ -3,7 +3,7 @@ import 'package:ditonton/domain/usecases/movie/save_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../dummy_data/dummy_objects.dart';
+import '../../../dummy_data/movie/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -17,12 +17,13 @@ void main() {
 
   test('should save movie to the repository', () async {
     // arrange
-    when(mockMovieRepository.saveWatchlist(testMovieDetail))
-        .thenAnswer((_) async => Right('Added to Watchlist'));
+    when(
+      mockMovieRepository.saveWatchlist(tMovieDetail),
+    ).thenAnswer((_) async => Right('Added to Watchlist'));
     // act
-    final result = await usecase.execute(testMovieDetail);
+    final result = await usecase.execute(tMovieDetail);
     // assert
-    verify(mockMovieRepository.saveWatchlist(testMovieDetail));
+    verify(mockMovieRepository.saveWatchlist(tMovieDetail));
     expect(result, Right('Added to Watchlist'));
   });
 }

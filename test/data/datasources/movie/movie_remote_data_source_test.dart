@@ -9,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
+import '../../../dummy_data/movie/dummy_objects.dart';
 import '../../../json_reader.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
@@ -127,7 +128,6 @@ void main() {
   });
 
   group('get movie detail', () {
-    final tId = 1;
     final endpoint = '$baseUrl/movie/$tId?$apiKey';
     final jsonPath = 'dummy_data/movie/movie_detail.json';
     final tMovieDetail = MovieDetailResponse.fromJson(
@@ -162,7 +162,6 @@ void main() {
   });
 
   group('get movie recommendations', () {
-    final tId = 1;
     final endpoint = '$baseUrl/movie/$tId/recommendations?$apiKey';
     final jsonPath = 'dummy_data/movie/movie_recommendations.json';
     final tMovieList =
@@ -199,7 +198,6 @@ void main() {
   });
 
   group('search movies', () {
-    final tQuery = 'Spiderman';
     final endpoint = '$baseUrl/search/movie?$apiKey&query=$tQuery';
     final jsonPath = 'dummy_data/movie/search_spiderman_movie.json';
     final tSearchResult =
