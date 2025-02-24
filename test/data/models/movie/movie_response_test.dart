@@ -4,8 +4,8 @@ import 'package:ditonton/data/models/movie/movie_model.dart';
 import 'package:ditonton/data/models/movie/movie_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../dummy_data/movie/dummy_objects.dart';
-import '../../json_reader.dart';
+import '../../../dummy_data/movie/dummy_objects.dart';
+import '../../../json_reader.dart';
 
 void main() {
   final tMovieResponseModel = MovieResponse(

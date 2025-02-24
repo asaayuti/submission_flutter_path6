@@ -16,7 +16,7 @@ final tTvSeriesModel = TvSeriesModel(
   originalName: "Spider-Man",
   overview:
       "Bitten by a neogenetic spider, Peter Parker develops spider-like superpowers. He uses these to fight crime while trying to balance it with the struggles of his personal life.",
-  popularity: 39.66,
+  popularity: 14.278,
   posterPath: "/peN9aqevr0edVoctVKGZDWFdTRl.jpg",
   firstAirDate: "1994-11-19",
   name: "Spider-Man",
@@ -34,7 +34,7 @@ final tTvSeries = TvSeries(
   originalName: "Spider-Man",
   overview:
       "Bitten by a neogenetic spider, Peter Parker develops spider-like superpowers. He uses these to fight crime while trying to balance it with the struggles of his personal life.",
-  popularity: 39.66,
+  popularity: 14.278,
   posterPath: "/peN9aqevr0edVoctVKGZDWFdTRl.jpg",
   firstAirDate: "1994-11-19",
   name: "Spider-Man",
