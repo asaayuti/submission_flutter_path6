@@ -53,7 +53,7 @@ final tEmptyTvSeriesModelList = <TvSeriesModel>[];
 final tTvSeriesDetailResponse = TvSeriesDetailResponse(
   adult: false,
   backdropPath: "/path_to_backdrop.jpg",
-  episodeRunTime: [42], // Durasi episode dalam menit
+  episodeRunTime: [42],
   firstAirDate: "2021-09-17",
   genres: [
     GenreModel(id: 18, name: "Drama"),
@@ -62,7 +62,7 @@ final tTvSeriesDetailResponse = TvSeriesDetailResponse(
   homepage: "https://www.example.com",
   id: 12345,
   inProduction: true,
-  languages: ["en", "es"], // Bahasa yang digunakan dalam TV series
+  languages: ["en", "es"],
   lastAirDate: "2023-06-12",
   name: "Sample TV Series",
   numberOfEpisodes: 50,
