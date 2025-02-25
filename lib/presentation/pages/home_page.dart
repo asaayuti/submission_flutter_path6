@@ -7,6 +7,7 @@ import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/now_playing_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
@@ -154,7 +155,14 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               Text('Tv Series', style: kHeading5),
-              Text('Now Playing', style: kHeading6),
+              _buildSubHeading(
+                title: 'Now Playing',
+                onTap:
+                    () => Navigator.pushNamed(
+                      context,
+                      NowPlayingTvSeriesPage.routeName,
+                    ),
+              ),
               Consumer<TvSeriesListNotifier>(
                 builder: (context, data, child) {
                   final state = data.nowPlayingState;

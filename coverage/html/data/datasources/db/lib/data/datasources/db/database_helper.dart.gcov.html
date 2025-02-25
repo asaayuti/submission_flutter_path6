@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-02-24 23:30:22</td>
+            <td class="headerValue">2025-02-25 10:10:57</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -179,12 +179,13 @@
 <span id="L117"><span class="lineNum">     117</span>              : </span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           1 :   Future&lt;List&lt;Map&lt;String, dynamic&gt;&gt;&gt; getWatchlistTvSeries() async {</span></span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           1 :     final db = await database;</span></span>
-<span id="L120"><span class="lineNum">     120</span>              :     final List&lt;Map&lt;String, dynamic&gt;&gt; results =</span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           1 :         await db!.query(_tblWatchlistTvSeries);</span></span>
-<span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span>              :     return results;</span>
-<span id="L124"><span class="lineNum">     124</span>              :   }</span>
-<span id="L125"><span class="lineNum">     125</span>              : }</span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           1 :     final List&lt;Map&lt;String, dynamic&gt;&gt; results = await db!.query(</span></span>
+<span id="L121"><span class="lineNum">     121</span>              :       _tblWatchlistTvSeries,</span>
+<span id="L122"><span class="lineNum">     122</span>              :     );</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :     return results;</span>
+<span id="L125"><span class="lineNum">     125</span>              :   }</span>
+<span id="L126"><span class="lineNum">     126</span>              : }</span>
         </pre>
               </td>
             </tr>
