@@ -1,10 +1,9 @@
-import 'package:core/styles/text_styles.dart';
-import 'package:core/utils/state_enum.dart';
-import '../provider/search_notifier.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:core/presentation/widgets/tv_series_card_list.dart';
+import 'package:core/styles/text_styles.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/bloc/search_bloc.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -19,8 +18,8 @@ class SearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                context.read<SearchNotifier>().fetchSearchResults(query);
+              onChanged: (query) {
+                context.read<SearchBloc>().add(OnQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -31,31 +30,37 @@ class SearchPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text('Search Result', style: kHeading6),
-            Expanded(
-              child: Consumer<SearchNotifier>(
-                builder: (context, data, child) {
-                  if (data.state == RequestState.loading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (data.state == RequestState.loaded) {
-                    return ListView(
+            BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state is SearchLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is SearchHasData) {
+                  final movies = state.movies;
+                  final tvSeries = state.tvSeries;
+
+                  return Expanded(
+                    child: ListView(
                       padding: const EdgeInsets.all(8),
                       children: [
                         _buildList(
                           title: 'Movies',
-                          items: data.movieSearchResult,
+                          items: movies,
                           itemBuilder: (item) => MovieCard(item),
                         ),
                         _buildList(
-                          title: 'TV Series',
-                          items: data.tvSeriesSearchResult,
+                          title: 'Tv Series',
+                          items: tvSeries,
                           itemBuilder: (item) => TvSeriesCard(item),
                         ),
                       ],
-                    );
-                  }
-                  return _buildEmptyState();
-                },
-              ),
+                    ),
+                  );
+                } else if (state is SearchError) {
+                  return Expanded(child: Center(child: Text(state.message)));
+                } else {
+                  return Expanded(child: _buildEmptyState());
+                }
+              },
             ),
           ],
         ),

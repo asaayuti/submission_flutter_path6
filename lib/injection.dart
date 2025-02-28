@@ -38,13 +38,15 @@ import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dar
 import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:search/bloc/search_bloc.dart';
 import 'package:search/domain/usecase/search_movies.dart';
 import 'package:search/domain/usecase/search_tv_series.dart';
-import 'package:search/presentation/provider/search_notifier.dart';
 
 final locator = GetIt.instance;
 
 void init() {
+  // bloc
+  locator.registerFactory(() => SearchBloc(locator(), locator()));
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -61,9 +63,6 @@ void init() {
       saveWatchlist: locator(),
       removeWatchlist: locator(),
     ),
-  );
-  locator.registerFactory(
-    () => SearchNotifier(searchMovies: locator(), searchTvSeries: locator()),
   );
   locator.registerFactory(() => PopularMoviesNotifier(locator()));
   locator.registerFactory(

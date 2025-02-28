@@ -1,9 +1,9 @@
+import 'package:core/utils/dummy_data/movies/dummy_objects.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:search/domain/usecase/search_movies.dart';
 
-import '../../../../core/test/dummy_data/movie/dummy_objects.dart';
 import '../../../../core/test/helpers/test_helper.mocks.dart';
 
 void main() {

@@ -26,10 +26,11 @@ import 'package:core/utils/utils.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:search/bloc/search_bloc.dart';
 import 'package:search/presentation/pages/search_page.dart';
-import 'package:search/presentation/provider/search_notifier.dart';
 
 void main() {
   di.init();
@@ -47,7 +48,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
-        ChangeNotifierProvider(create: (_) => di.locator<SearchNotifier>()),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
         ),
@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
         ),
+        BlocProvider(create: (_) => di.locator<SearchBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

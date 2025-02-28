@@ -4,7 +4,7 @@ import 'package:core/data/models/movie/movie_model.dart';
 import 'package:core/data/models/movie/movie_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../dummy_data/movie/dummy_objects.dart';
+import 'package:core/utils/dummy_data/movies/dummy_objects.dart';
 import '../../../json_reader.dart';
 
 void main() {

@@ -3,7 +3,7 @@ import 'package:core/domain/usecases/tv_series/save_watchlist_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {

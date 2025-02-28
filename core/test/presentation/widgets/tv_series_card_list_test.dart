@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 

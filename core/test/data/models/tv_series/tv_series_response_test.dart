@@ -4,7 +4,7 @@ import 'package:core/data/models/tv_series/tv_series_model.dart';
 import 'package:core/data/models/tv_series/tv_series_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
 import '../../../json_reader.dart';
 
 void main() {
