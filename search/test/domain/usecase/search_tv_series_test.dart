@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/domain/usecase/search_tv_series.dart';
 
-import '../../../dummy_data/movie/dummy_objects.dart';
-import '../../../dummy_data/tv_series/dummy_objects.dart';
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../core/test/dummy_data/movie/dummy_objects.dart';
+import '../../../../core/test/dummy_data/tv_series/dummy_objects.dart';
+import '../../../../core/test/helpers/test_helper.mocks.dart';
 
 void main() {
   late SearchTvSeries usecase;

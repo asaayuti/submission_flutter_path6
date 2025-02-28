@@ -16,7 +16,6 @@ import 'package:core/domain/usecases/movie/get_watchlist_movies.dart';
 import 'package:core/domain/usecases/movie/get_watchlist_status.dart';
 import 'package:core/domain/usecases/movie/remove_watchlist.dart';
 import 'package:core/domain/usecases/movie/save_watchlist.dart';
-import 'package:core/domain/usecases/movie/search_movies.dart';
 import 'package:core/domain/usecases/tv_series/get_now_playing_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/get_popular_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/get_top_rated_tv_series.dart';
@@ -26,10 +25,8 @@ import 'package:core/domain/usecases/tv_series/get_watchlist_status_tv_series.da
 import 'package:core/domain/usecases/tv_series/get_watchlist_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/remove_watchlist_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/save_watchlist_tv_series.dart';
-import 'package:core/domain/usecases/tv_series/search_tv_series.dart';
 import 'package:core/presentation/provider/movie/movie_detail_notifier.dart';
 import 'package:core/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:core/presentation/provider/movie/popular_movies_notifier.dart';
 import 'package:core/presentation/provider/movie/top_rated_movies_notifier.dart';
 import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
@@ -41,6 +38,9 @@ import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dar
 import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
+import 'package:search/domain/usecase/search_movies.dart';
+import 'package:search/domain/usecase/search_tv_series.dart';
+import 'package:search/presentation/provider/search_notifier.dart';
 
 final locator = GetIt.instance;
 

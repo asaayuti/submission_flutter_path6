@@ -1,8 +1,8 @@
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/state_enum.dart';
 import '../provider/search_notifier.dart';
-import '../widgets/movie_card_list.dart';
-import '../widgets/tv_series_card_list.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

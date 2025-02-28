@@ -1,6 +1,3 @@
-import 'package:core/domain/usecases/movie/search_movies.dart';
-import 'package:core/domain/usecases/tv_series/search_tv_series.dart';
-import 'package:core/presentation/provider/search_notifier.dart';
 import 'package:core/utils/failure.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:dartz/dartz.dart';
@@ -8,9 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:search/domain/usecase/search_movies.dart';
+import 'package:search/domain/usecase/search_tv_series.dart';
+import 'package:search/presentation/provider/search_notifier.dart';
 
-import '../../dummy_data/movie/dummy_objects.dart';
-import '../../dummy_data/tv_series/dummy_objects.dart';
+import '../../../../core/test/dummy_data/movie/dummy_objects.dart';
+import '../../../../core/test/dummy_data/tv_series/dummy_objects.dart';
 import 'search_notifier_test.mocks.dart';
 
 @GenerateMocks([SearchMovies, SearchTvSeries])

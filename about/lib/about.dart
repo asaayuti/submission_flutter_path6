@@ -1,3 +1,3 @@
-library about;
+library;
 
 export 'about_page.dart';
