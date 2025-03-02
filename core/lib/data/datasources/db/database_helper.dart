@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core/utils/encrypt.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
 
 import '../../models/movie/movie_table.dart';
@@ -32,7 +31,7 @@ class DatabaseHelper {
       databasePath,
       version: 1,
       onCreate: _onCreate,
-      password: encrypt("my password"),
+      password: "my password",
     );
     return db;
   }
