@@ -23,6 +23,8 @@ import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/utils/utils.dart';
+import 'package:ditonton/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,9 @@ import 'package:ditonton/injection.dart' as di;
 import 'package:search/bloc/search_bloc.dart';
 import 'package:search/presentation/pages/search_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   di.init();
   runApp(MyApp());
 }

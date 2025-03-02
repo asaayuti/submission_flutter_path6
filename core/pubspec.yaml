@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  about:
+    path: ../about
+
   http: ^1.2.2
   provider: ^6.1.2
   dartz: ^0.10.1
@@ -24,11 +27,9 @@ dependencies:
   path_provider: ^2.1.4
   intl: ^0.20.2
   sqflite_common_ffi: ^2.3.4+4
-
-  about:
-    path: ../about
   sqflite_sqlcipher: ^3.1.0+1
   encrypt: ^5.0.3
+  firebase_crashlytics: ^4.3.4
 
 dev_dependencies:
   mockito: ^5.0.8
