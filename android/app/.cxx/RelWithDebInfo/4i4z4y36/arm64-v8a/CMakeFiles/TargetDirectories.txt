@@ -1,0 +1,2 @@
+/home/sayuti/Documents/Courses/Dicoding/Flutter/Path 6/Submission/submission_flutter_path6/android/app/.cxx/RelWithDebInfo/4i4z4y36/arm64-v8a/CMakeFiles/edit_cache.dir
+/home/sayuti/Documents/Courses/Dicoding/Flutter/Path 6/Submission/submission_flutter_path6/android/app/.cxx/RelWithDebInfo/4i4z4y36/arm64-v8a/CMakeFiles/rebuild_cache.dir
