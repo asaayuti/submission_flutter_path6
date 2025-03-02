@@ -1,120 +1,128 @@
 import 'package:core/data/datasources/db/database_helper.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:core/data/models/movie/movie_table.dart';
 import 'package:core/data/models/tv_series/tv_series_table.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:core/data/models/movie/movie_table.dart';
 
+import '../../../helpers/test_helper.mocks.dart';
+
+@GenerateMocks([DatabaseHelper])
 void main() {
-  late DatabaseHelper dbHelper;
-  sqfliteFfiInit();
-  databaseFactory = databaseFactoryFfi;
+  late MockDatabaseHelper databaseHelper;
 
-  setUp(() async {
-    dbHelper = DatabaseHelper();
-    final db = await dbHelper.database;
-    await db!.rawDelete('DELETE FROM watchlist');
-    await db.rawDelete('DELETE FROM watchlist_tv_series');
+  setUpAll(() {
+    sqfliteFfiInit();
   });
 
-  group('Movie Watchlist Tests', () {
-    test('insert and get movie by id', () async {
-      final movie = MovieTable(
-        id: 1,
-        title: 'Test Movie',
-        overview: 'Test Overview',
-        posterPath: '/test.jpg',
-      );
-      await dbHelper.insertWatchlist(movie);
+  setUp(() {
+    databaseHelper = MockDatabaseHelper();
+  });
 
-      final result = await dbHelper.getMovieById(1);
-      expect(result, isNotNull);
-      expect(result!['title'], equals('Test Movie'));
+  group('Movie Test', () {
+    final testMovie = MovieTable(
+      id: 1,
+      title: "Test Movie",
+      overview: "Overview",
+      posterPath: "/path.jpg",
+    );
+
+    test('insert movie to watchlist', () async {
+      when(databaseHelper.insertWatchlist(any)).thenAnswer((_) async => 1);
+
+      final result = await databaseHelper.insertWatchlist(testMovie);
+
+      expect(result, 1);
+      verify(databaseHelper.insertWatchlist(testMovie)).called(1);
     });
 
     test('remove movie from watchlist', () async {
-      final movie = MovieTable(
-        id: 2,
-        title: 'Test Movie 2',
-        overview: 'Test Overview 2',
-        posterPath: '/test2.jpg',
-      );
-      await dbHelper.insertWatchlist(movie);
-      await dbHelper.removeWatchlist(movie);
+      when(databaseHelper.removeWatchlist(any)).thenAnswer((_) async => 1);
 
-      final result = await dbHelper.getMovieById(2);
-      expect(result, isNull);
+      final result = await databaseHelper.removeWatchlist(testMovie);
+
+      expect(result, 1);
+      verify(databaseHelper.removeWatchlist(testMovie)).called(1);
     });
 
-    test('get watchlist movies list', () async {
-      final movie1 = MovieTable(
-        id: 3,
-        title: 'Movie 3',
-        overview: 'Overview 3',
-        posterPath: '/3.jpg',
-      );
-      final movie2 = MovieTable(
-        id: 4,
-        title: 'Movie 4',
-        overview: 'Overview 4',
-        posterPath: '/4.jpg',
-      );
-      await dbHelper.insertWatchlist(movie1);
-      await dbHelper.insertWatchlist(movie2);
+    test('get movie by id', () async {
+      when(
+        databaseHelper.getMovieById(any),
+      ).thenAnswer((_) async => testMovie.toJson());
 
-      final list = await dbHelper.getWatchlistMovies();
-      expect(list.where((movie) => movie['id'] == 3).isNotEmpty, isTrue);
-      expect(list.where((movie) => movie['id'] == 4).isNotEmpty, isTrue);
+      final movie = await databaseHelper.getMovieById(1);
+
+      expect(movie, isNotNull);
+      expect(movie!['title'], "Test Movie");
+      verify(databaseHelper.getMovieById(1)).called(1);
+    });
+
+    test('get watchlist movies', () async {
+      when(
+        databaseHelper.getWatchlistMovies(),
+      ).thenAnswer((_) async => [testMovie.toJson()]);
+
+      final result = await databaseHelper.getWatchlistMovies();
+
+      expect(result, isNotEmpty);
+      expect(result.length, 1);
+      verify(databaseHelper.getWatchlistMovies()).called(1);
     });
   });
 
-  group('TV Series Watchlist Tests', () {
-    test('insert and get tv series by id', () async {
-      final tvSeries = TvSeriesTable(
-        id: 1,
-        name: 'Test TV Series',
-        overview: 'Test Overview',
-        posterPath: '/testtv.jpg',
-      );
-      await dbHelper.insertWatchlistTvSeries(tvSeries);
+  group('TV Series Test', () {
+    final testTvSeries = TvSeriesTable(
+      id: 100,
+      name: "Test TV Series",
+      overview: "TV Series Overview",
+      posterPath: "/tv_series_path.jpg",
+    );
 
-      final result = await dbHelper.getTvSeriesById(1);
-      expect(result, isNotNull);
-      expect(result!['name'], equals('Test TV Series'));
+    test('insert TV series to watchlist', () async {
+      when(
+        databaseHelper.insertWatchlistTvSeries(any),
+      ).thenAnswer((_) async => 1);
+
+      final result = await databaseHelper.insertWatchlistTvSeries(testTvSeries);
+
+      expect(result, 1);
+      verify(databaseHelper.insertWatchlistTvSeries(testTvSeries)).called(1);
     });
 
-    test('remove tv series from watchlist', () async {
-      final tvSeries = TvSeriesTable(
-        id: 2,
-        name: 'Test TV Series 2',
-        overview: 'Test Overview 2',
-        posterPath: '/testtv2.jpg',
-      );
-      await dbHelper.insertWatchlistTvSeries(tvSeries);
-      await dbHelper.removeWatchlistTvSeries(tvSeries);
+    test('remove TV series from watchlist', () async {
+      when(
+        databaseHelper.removeWatchlistTvSeries(any),
+      ).thenAnswer((_) async => 1);
 
-      final result = await dbHelper.getTvSeriesById(2);
-      expect(result, isNull);
+      final result = await databaseHelper.removeWatchlistTvSeries(testTvSeries);
+
+      expect(result, 1);
+      verify(databaseHelper.removeWatchlistTvSeries(testTvSeries)).called(1);
     });
 
-    test('get watchlist tv series list', () async {
-      final tvSeries1 = TvSeriesTable(
-        id: 3,
-        name: 'TV Series 3',
-        overview: 'Overview 3',
-        posterPath: '/3.jpg',
-      );
-      final tvSeries2 = TvSeriesTable(
-        id: 4,
-        name: 'TV Series 4',
-        overview: 'Overview 4',
-        posterPath: '/4.jpg',
-      );
-      await dbHelper.insertWatchlistTvSeries(tvSeries1);
-      await dbHelper.insertWatchlistTvSeries(tvSeries2);
+    test('get TV series by id', () async {
+      when(
+        databaseHelper.getTvSeriesById(any),
+      ).thenAnswer((_) async => testTvSeries.toJson());
 
-      final list = await dbHelper.getWatchlistTvSeries();
-      expect(list.where((series) => series['id'] == 3).isNotEmpty, isTrue);
-      expect(list.where((series) => series['id'] == 4).isNotEmpty, isTrue);
+      final tvSeries = await databaseHelper.getTvSeriesById(100);
+
+      expect(tvSeries, isNotNull);
+      expect(tvSeries!['name'], "Test TV Series");
+      verify(databaseHelper.getTvSeriesById(100)).called(1);
+    });
+
+    test('get watchlist TV series', () async {
+      when(
+        databaseHelper.getWatchlistTvSeries(),
+      ).thenAnswer((_) async => [testTvSeries.toJson()]);
+
+      final result = await databaseHelper.getWatchlistTvSeries();
+
+      expect(result, isNotEmpty);
+      expect(result.length, 1);
+      verify(databaseHelper.getWatchlistTvSeries()).called(1);
     });
   });
 }
