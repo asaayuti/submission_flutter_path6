@@ -27,6 +27,8 @@ dependencies:
 
   about:
     path: ../about
+  sqflite_sqlcipher: ^3.1.0+1
+  encrypt: ^5.0.3
 
 dev_dependencies:
   mockito: ^5.0.8

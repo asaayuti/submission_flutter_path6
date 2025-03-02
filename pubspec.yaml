@@ -44,6 +44,8 @@ dependencies:
   search:
     path: search
   flutter_bloc: ^9.0.0
+  sqflite_sqlcipher: ^3.1.0+1
+  encrypt: ^5.0.3
 dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4
