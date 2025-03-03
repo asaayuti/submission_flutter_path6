@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/sayuti/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/sayuti/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/sayuti/Documents/Courses/Dicoding/Flutter/Path 6/Submission/submission_flutter_path6/android/app/.cxx/RelWithDebInfo/4i4z4y36/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/sayuti/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/sayuti/Documents/Courses/Dicoding/Flutter/Path 6/Submission/submission_flutter_path6/android/app/.cxx/RelWithDebInfo/4i4z4y36/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
