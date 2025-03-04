@@ -1,4 +1,8 @@
-import 'package:about/about.dart';
+import 'package:core/presentation/bloc/movie_detail_bloc.dart';
+import 'package:core/presentation/bloc/now_playing_movies_bloc.dart';
+import 'package:core/presentation/bloc/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/movie/movie_detail_page.dart';
 import 'package:core/presentation/pages/movie/popular_movies_page.dart';
@@ -8,11 +12,6 @@ import 'package:core/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:core/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
-import 'package:core/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:core/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:core/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:core/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
 import 'package:core/presentation/provider/tv_series/now_playing_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
@@ -31,7 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
-import 'package:search/bloc/search_bloc.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/presentation/pages/search_page.dart';
 
 void main() async {
@@ -48,19 +47,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => di.locator<MovieListNotifier>()),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),
         ),
@@ -80,6 +66,11 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<WatchlistTvSeriesNotifier>(),
         ),
         BlocProvider(create: (_) => di.locator<SearchBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<NowPlayingMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<PopularMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<TopRatedMoviesBloc>()),
+        BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -125,7 +116,6 @@ class MyApp extends StatelessWidget {
             case watchlistRoute:
               return MaterialPageRoute(builder: (_) => WatchlistPage());
             case aboutRoute:
-              return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(
                 builder: (_) {

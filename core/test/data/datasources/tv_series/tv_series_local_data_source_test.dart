@@ -3,8 +3,8 @@ import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:core/utils/dummy_data/movies/dummy_objects.dart';
-import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/dummy_movies.dart';
+import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {

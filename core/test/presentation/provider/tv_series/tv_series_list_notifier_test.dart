@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import 'tv_series_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingTvSeries, GetPopularTvSeries, GetTopRatedTvSeries])

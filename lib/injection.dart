@@ -25,11 +25,11 @@ import 'package:core/domain/usecases/tv_series/get_watchlist_status_tv_series.da
 import 'package:core/domain/usecases/tv_series/get_watchlist_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/remove_watchlist_tv_series.dart';
 import 'package:core/domain/usecases/tv_series/save_watchlist_tv_series.dart';
-import 'package:core/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:core/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:core/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:core/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:core/presentation/provider/movie/watchlist_movie_notifier.dart';
+import 'package:core/presentation/bloc/movie_detail_bloc.dart';
+import 'package:core/presentation/bloc/now_playing_movies_bloc.dart';
+import 'package:core/presentation/bloc/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:core/presentation/provider/tv_series/now_playing_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:core/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
@@ -38,25 +38,17 @@ import 'package:core/presentation/provider/tv_series/tv_series_list_notifier.dar
 import 'package:core/presentation/provider/tv_series/watchlist_tv_series_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
-import 'package:search/bloc/search_bloc.dart';
 import 'package:search/domain/usecase/search_movies.dart';
 import 'package:search/domain/usecase/search_tv_series.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
 
 final locator = GetIt.instance;
 
 void init() {
   // bloc
   locator.registerFactory(() => SearchBloc(locator(), locator()));
-  // provider
   locator.registerFactory(
-    () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => MovieDetailNotifier(
+    () => MovieDetailBloc(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
       getWatchListStatus: locator(),
@@ -64,13 +56,11 @@ void init() {
       removeWatchlist: locator(),
     ),
   );
-  locator.registerFactory(() => PopularMoviesNotifier(locator()));
-  locator.registerFactory(
-    () => TopRatedMoviesNotifier(getTopRatedMovies: locator()),
-  );
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(getWatchlistMovies: locator()),
-  );
+  locator.registerFactory(() => NowPlayingMoviesBloc(locator()));
+  locator.registerFactory(() => PopularMoviesBloc(locator()));
+  locator.registerFactory(() => TopRatedMoviesBloc(locator()));
+  locator.registerFactory(() => WatchlistMovieBloc(locator()));
+  // provider
   // tv series
   locator.registerFactory(
     () => TvSeriesListNotifier(

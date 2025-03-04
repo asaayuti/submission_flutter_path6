@@ -8,7 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
-import 'package:core/utils/dummy_data/tv_series/dummy_objects.dart';
+import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import 'tv_series_detail_page_test.mocks.dart';
 
 @GenerateMocks([TvSeriesDetailNotifier])

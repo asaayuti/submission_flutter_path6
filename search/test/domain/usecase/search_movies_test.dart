@@ -1,4 +1,4 @@
-import 'package:core/utils/dummy_data/movies/dummy_objects.dart';
+import 'package:core/utils/dummy_data/dummy_movies.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
