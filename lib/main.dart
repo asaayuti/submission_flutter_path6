@@ -1,3 +1,4 @@
+import 'package:about/about_page.dart';
 import 'package:core/presentation/bloc/movie/movie_detail_bloc.dart';
 import 'package:core/presentation/bloc/movie/now_playing_movies_bloc.dart';
 import 'package:core/presentation/bloc/movie/popular_movies_bloc.dart';
@@ -102,6 +103,7 @@ class MyApp extends StatelessWidget {
             case watchlistRoute:
               return MaterialPageRoute(builder: (_) => WatchlistPage());
             case aboutRoute:
+              return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(
                 builder: (_) {
