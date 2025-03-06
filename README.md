@@ -1,3 +1,4 @@
+[![Codemagic build status](https://api.codemagic.io/apps/67c55c53476564094f0a3d29/67c55c53476564094f0a3d28/status_badge.svg)](https://codemagic.io/app/67c55c53476564094f0a3d29/67c55c53476564094f0a3d28/latest_build)
 # Submission Dicoding Flutter Path 6 
 
 Repository ini merupakan starter project submission kelas Flutter Expert Dicoding Indonesia.
