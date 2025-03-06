@@ -53,9 +53,12 @@ runReport() {
 
     if [ "$(uname)" == "Darwin" ]; then
       open coverage/index.html
+    elif [ "$(uname)" == "Linux" ]; then
+      open coverage/index.html
     else
       start coverage/index.html
-    fi
+fi
+
   fi
 }
 

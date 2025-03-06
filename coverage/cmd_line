@@ -1,0 +1,1 @@
+genhtml coverage/test.info -o coverage --no-function-coverage --prefix /home/sayuti/Documents/Courses/Dicoding/Flutter/path_6/Submission/submission_flutter_path6
