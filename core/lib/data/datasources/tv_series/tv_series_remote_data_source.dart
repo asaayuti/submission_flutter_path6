@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:core/utils/constants.dart';
 import 'package:core/utils/exception.dart';
+import 'package:core/utils/ssl_client_provider.dart';
 import '../../models/tv_series/tv_series_detail_model.dart';
 import '../../models/tv_series/tv_series_model.dart';
 import '../../models/tv_series/tv_series_response.dart';
@@ -17,12 +18,17 @@ abstract class TvSeriesRemoteDataSource {
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
-  final http.Client client;
+  http.Client client;
+  final SslClientProvider sslClientProvider;
 
-  TvSeriesRemoteDataSourceImpl({required this.client});
+  TvSeriesRemoteDataSourceImpl({
+    required this.client,
+    required this.sslClientProvider,
+  });
 
   @override
   Future<List<TvSeriesModel>> getNowPlayingTvSeries() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/tv/on_the_air?$apiKey'),
     );
@@ -36,6 +42,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(Uri.parse('$baseUrl/tv/popular?$apiKey'));
 
     if (response.statusCode == 200) {
@@ -47,6 +54,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/tv/top_rated?$apiKey'),
     );
@@ -60,6 +68,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(Uri.parse('$baseUrl/tv/$id?$apiKey'));
 
     if (response.statusCode == 200) {
@@ -71,6 +80,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendations(int id) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/tv/$id/recommendations?$apiKey'),
     );
@@ -84,6 +94,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/search/tv?$apiKey&query=$query'),
     );

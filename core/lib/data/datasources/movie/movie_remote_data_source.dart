@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:core/utils/constants.dart';
+import 'package:core/utils/ssl_client_provider.dart';
+
 import '../../models/movie/movie_detail_model.dart';
 import '../../models/movie/movie_model.dart';
 import '../../models/movie/movie_response.dart';
@@ -17,12 +19,17 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  final http.Client client;
+  http.Client client;
+  final SslClientProvider sslClientProvider;
 
-  MovieRemoteDataSourceImpl({required this.client});
+  MovieRemoteDataSourceImpl({
+    required this.client,
+    required this.sslClientProvider,
+  });
 
   @override
   Future<List<MovieModel>> getNowPlayingMovies() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/movie/now_playing?$apiKey'),
     );
@@ -36,6 +43,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<MovieDetailResponse> getMovieDetail(int id) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(Uri.parse('$baseUrl/movie/$id?$apiKey'));
 
     if (response.statusCode == 200) {
@@ -47,6 +55,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations(int id) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/movie/$id/recommendations?$apiKey'),
     );
@@ -60,6 +69,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getPopularMovies() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/movie/popular?$apiKey'),
     );
@@ -73,6 +83,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getTopRatedMovies() async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/movie/top_rated?$apiKey'),
     );
@@ -86,6 +97,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> searchMovies(String query) async {
+    client = await sslClientProvider.getSSLPinningClient();
     final response = await client.get(
       Uri.parse('$baseUrl/search/movie?$apiKey&query=$query'),
     );

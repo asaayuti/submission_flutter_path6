@@ -36,6 +36,7 @@ import 'package:core/presentation/bloc/tv_series/popular_tvs_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/top_rated_tvs_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/watchlist_tv_bloc.dart';
+import 'package:core/utils/ssl_client_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:search/domain/usecase/search_movies.dart';
@@ -115,13 +116,19 @@ void init() {
 
   // data sources
   locator.registerLazySingleton<MovieRemoteDataSource>(
-    () => MovieRemoteDataSourceImpl(client: locator()),
+    () => MovieRemoteDataSourceImpl(
+      client: locator(),
+      sslClientProvider: locator(),
+    ),
   );
   locator.registerLazySingleton<MovieLocalDataSource>(
     () => MovieLocalDataSourceImpl(databaseHelper: locator()),
   );
   locator.registerLazySingleton<TvSeriesRemoteDataSource>(
-    () => TvSeriesRemoteDataSourceImpl(client: locator()),
+    () => TvSeriesRemoteDataSourceImpl(
+      client: locator(),
+      sslClientProvider: locator(),
+    ),
   );
   locator.registerLazySingleton<TvSeriesLocalDataSource>(
     () => TvSeriesLocalDataSourceImpl(databaseHelper: locator()),
@@ -132,4 +139,5 @@ void init() {
 
   // external
   locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => SslClientProvider());
 }

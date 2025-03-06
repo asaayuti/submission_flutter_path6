@@ -12,14 +12,23 @@ import 'package:mockito/mockito.dart';
 import 'package:core/utils/dummy_data/dummy_movies.dart';
 import '../../../json_reader.dart';
 import '../../../helpers/test_helper.mocks.dart';
+import '../movie/movie_remote_data_source_test.mocks.dart';
 
 void main() {
   late TvSeriesRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
+  late MockSslClientProvider mockSslClientProvider;
 
   setUp(() {
     mockHttpClient = MockHttpClient();
-    dataSource = TvSeriesRemoteDataSourceImpl(client: mockHttpClient);
+    mockSslClientProvider = MockSslClientProvider();
+    when(
+      mockSslClientProvider.getSSLPinningClient(),
+    ).thenAnswer((_) async => mockHttpClient);
+    dataSource = TvSeriesRemoteDataSourceImpl(
+      client: mockHttpClient,
+      sslClientProvider: mockSslClientProvider,
+    );
   });
 
   group('get Now Playing TvSeries', () {
