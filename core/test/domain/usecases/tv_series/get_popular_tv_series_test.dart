@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/domain/usecases/tv_series/get_popular_tv_series.dart';
+import 'package:core/domain/usecases/tv_series/get_popular_tvs.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -7,12 +7,12 @@ import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetPopularTvSeries usecase;
+  late GetPopularTvs usecase;
   late MockTvSeriesRepository mockTvSeriesRpository;
 
   setUp(() {
     mockTvSeriesRpository = MockTvSeriesRepository();
-    usecase = GetPopularTvSeries(mockTvSeriesRpository);
+    usecase = GetPopularTvs(mockTvSeriesRpository);
   });
 
   group('GetPopularTvSeries Tests', () {

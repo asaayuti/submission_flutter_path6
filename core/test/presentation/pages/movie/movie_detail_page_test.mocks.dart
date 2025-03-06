@@ -11,9 +11,9 @@ import 'package:core/domain/usecases/movie/get_movie_recommendations.dart'
 import 'package:core/domain/usecases/movie/get_watchlist_status.dart' as _i4;
 import 'package:core/domain/usecases/movie/remove_watchlist.dart' as _i6;
 import 'package:core/domain/usecases/movie/save_watchlist.dart' as _i5;
-import 'package:core/presentation/bloc/movie_detail_bloc.dart' as _i8;
-import 'package:core/presentation/bloc/movie_detail_event.dart' as _i10;
-import 'package:core/presentation/bloc/movie_detail_state.dart' as _i7;
+import 'package:core/presentation/bloc/movie/movie_detail_bloc.dart' as _i8;
+import 'package:core/presentation/bloc/movie/movie_detail_event.dart' as _i10;
+import 'package:core/presentation/bloc/movie/movie_detail_state.dart' as _i7;
 import 'package:flutter_bloc/flutter_bloc.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -43,9 +43,9 @@ class _FakeGetMovieRecommendations_1 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeGetWatchListStatus_2 extends _i1.SmartFake
-    implements _i4.GetWatchListStatus {
-  _FakeGetWatchListStatus_2(Object parent, Invocation parentInvocation)
+class _FakeGetWatchlistStatus_2 extends _i1.SmartFake
+    implements _i4.GetWatchlistStatus {
+  _FakeGetWatchlistStatus_2(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -101,19 +101,19 @@ class MockMovieDetailBloc extends _i1.Mock implements _i8.MovieDetailBloc {
           as _i3.GetMovieRecommendations);
 
   @override
-  _i4.GetWatchListStatus get getWatchListStatus =>
+  _i4.GetWatchlistStatus get getWatchListStatus =>
       (super.noSuchMethod(
             Invocation.getter(#getWatchListStatus),
-            returnValue: _FakeGetWatchListStatus_2(
+            returnValue: _FakeGetWatchlistStatus_2(
               this,
               Invocation.getter(#getWatchListStatus),
             ),
-            returnValueForMissingStub: _FakeGetWatchListStatus_2(
+            returnValueForMissingStub: _FakeGetWatchlistStatus_2(
               this,
               Invocation.getter(#getWatchListStatus),
             ),
           )
-          as _i4.GetWatchListStatus);
+          as _i4.GetWatchlistStatus);
 
   @override
   _i5.SaveWatchlist get saveWatchlist =>

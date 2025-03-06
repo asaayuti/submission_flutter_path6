@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/presentation/bloc/movie_detail_bloc.dart';
-import 'package:core/presentation/bloc/movie_detail_event.dart';
-import 'package:core/presentation/bloc/movie_detail_state.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_bloc.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_event.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_state.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
@@ -149,7 +149,6 @@ class DetailContent extends StatelessWidget {
                                 },
                               ),
                             ),
-
                             Text(_showGenres(movie.genres)),
                             Text(_showDuration(movie.runtime)),
                             Row(

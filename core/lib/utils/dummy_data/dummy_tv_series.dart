@@ -45,7 +45,7 @@ final tTvSeries = TvSeries(
 final tTvSeriesModelList = <TvSeriesModel>[tTvSeriesModel];
 final tTvSeriesList = <TvSeries>[tTvSeries];
 
-final tTvSeriesId = 1;
+final tTvId = 1;
 
 final tEmptyTvSeriesList = <TvSeries>[];
 final tEmptyTvSeriesModelList = <TvSeriesModel>[];
@@ -60,7 +60,7 @@ final tTvSeriesDetailResponse = TvSeriesDetailResponse(
     GenreModel(id: 9648, name: "Mystery"),
   ],
   homepage: "https://www.example.com",
-  id: 12345,
+  id: 1,
   inProduction: true,
   languages: ["en", "es"],
   lastAirDate: "2023-06-12",
@@ -86,7 +86,7 @@ final tTvSeriesDetail = TvSeriesDetail(
   episodeRunTime: [42],
   firstAirDate: "2021-09-17",
   genres: [Genre(id: 18, name: "Drama"), Genre(id: 9648, name: "Mystery")],
-  id: 12345,
+  id: 1,
   name: "Sample TV Series",
   originalName: "Sample TV Series Original",
   overview: "This is a sample TV series overview.",
@@ -96,21 +96,21 @@ final tTvSeriesDetail = TvSeriesDetail(
 );
 
 final tTvSeriesTable = TvSeriesTable(
-  id: 12345,
+  id: 1,
   name: 'Sample TV Series',
   posterPath: '/path_to_poster.jpg',
   overview: 'This is a sample TV series overview.',
 );
 
 final tTvSeriesMap = {
-  'id': 12345,
+  'id': 1,
   'overview': 'This is a sample TV series overview.',
   'posterPath': '/path_to_poster.jpg',
   'name': 'Sample TV Series',
 };
 
 final tWatchlistTvSeries = TvSeries.watchlist(
-  id: 12345,
+  id: 1,
   name: 'Sample TV Series',
   posterPath: '/path_to_poster.jpg',
   overview: 'This is a sample TV series overview.',

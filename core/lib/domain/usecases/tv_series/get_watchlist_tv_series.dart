@@ -3,10 +3,10 @@ import 'package:core/utils/failure.dart';
 import '../../entities/tv_series/tv_series.dart';
 import '../../repositories/tv_series_repository.dart';
 
-class GetWatchlistTvSeries {
+class GetWatchlistTvs {
   final TvSeriesRepository repository;
 
-  GetWatchlistTvSeries(this.repository);
+  GetWatchlistTvs(this.repository);
 
   Future<Either<Failure, List<TvSeries>>> execute() {
     return repository.getWatchlistTvSeries();

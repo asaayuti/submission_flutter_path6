@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/presentation/bloc/now_playing_movies_bloc.dart';
-import 'package:core/presentation/bloc/popular_movies_bloc.dart';
-import 'package:core/presentation/bloc/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/movie/now_playing_movies_bloc.dart';
+import 'package:core/presentation/bloc/movie/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/movie/top_rated_movies_bloc.dart';
+import 'package:core/presentation/bloc/tv_series/now_playing_tvs_bloc.dart';
+import 'package:core/presentation/bloc/tv_series/popular_tvs_bloc.dart';
+import 'package:core/presentation/bloc/tv_series/top_rated_tvs_bloc.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/movie/movie.dart';
 import '../../domain/entities/tv_series/tv_series.dart';
-import 'package:core/utils/state_enum.dart';
-import '../provider/tv_series/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,10 +30,9 @@ class _HomePageState extends State<HomePage> {
         context.read<PopularMoviesBloc>().add(FetchPopularMovies());
         context.read<TopRatedMoviesBloc>().add(FetchTopRatedMovies());
 
-        Provider.of<TvSeriesListNotifier>(context, listen: false)
-          ..fetchNowPlayingTvSeries()
-          ..fetchPopularTvSeries()
-          ..fetchTopRatedTvSeries();
+        context.read<NowPlayingTvsBloc>().add(FetchNowPlayingTvs());
+        context.read<PopularTvsBloc>().add(FetchPopularTvs());
+        context.read<TopRatedTvsBloc>().add(FetchTopRatedTvs());
       }
     });
   }
@@ -150,15 +149,16 @@ class _HomePageState extends State<HomePage> {
                 onTap:
                     () => Navigator.pushNamed(context, nowPlayingTvSeriesRoute),
               ),
-              Consumer<TvSeriesListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.nowPlayingState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<NowPlayingTvsBloc, NowPlayingTvsState>(
+                builder: (context, state) {
+                  if (state is NowPlayingTvsLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state == RequestState.loaded) {
-                    return TvSeriesList(data.nowPlayingTvSeries);
+                  } else if (state is NowPlayingTvsHasData) {
+                    return TvSeriesList(state.tvSeries);
+                  } else if (state is NowPlayingTvsError) {
+                    return Center(child: Text(state.message));
                   } else {
-                    return Text('Failed');
+                    return Container();
                   }
                 },
               ),
@@ -166,15 +166,16 @@ class _HomePageState extends State<HomePage> {
                 title: 'Popular',
                 onTap: () => Navigator.pushNamed(context, popularTvSeriesRoute),
               ),
-              Consumer<TvSeriesListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.popularTvSeriesState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<PopularTvsBloc, PopularTvsState>(
+                builder: (context, state) {
+                  if (state is PopularTvsLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state == RequestState.loaded) {
-                    return TvSeriesList(data.popularTvSeries);
+                  } else if (state is PopularTvsHasData) {
+                    return TvSeriesList(state.tvSeries);
+                  } else if (state is PopularTvsError) {
+                    return Center(child: Text(state.message));
                   } else {
-                    return Text('Failed');
+                    return Container();
                   }
                 },
               ),
@@ -183,15 +184,16 @@ class _HomePageState extends State<HomePage> {
                 onTap:
                     () => Navigator.pushNamed(context, topRatedTvSeriesRoute),
               ),
-              Consumer<TvSeriesListNotifier>(
-                builder: (context, data, child) {
-                  final state = data.topRatedTvSeriesState;
-                  if (state == RequestState.loading) {
+              BlocBuilder<TopRatedTvsBloc, TopRatedTvsState>(
+                builder: (context, state) {
+                  if (state is TopRatedTvsLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state == RequestState.loaded) {
-                    return TvSeriesList(data.topRatedTvSeries);
+                  } else if (state is TopRatedTvsHasData) {
+                    return TvSeriesList(state.tvs);
+                  } else if (state is TopRatedTvsError) {
+                    return Center(child: Text(state.message));
                   } else {
-                    return Text('Failed');
+                    return Container();
                   }
                 },
               ),

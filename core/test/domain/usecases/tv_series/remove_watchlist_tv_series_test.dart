@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:core/domain/usecases/tv_series/remove_watchlist_tv_series.dart';
+import 'package:core/domain/usecases/tv_series/remove_watchlist_tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -7,12 +7,12 @@ import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late RemoveWatchlistTvSeries usecase;
+  late RemoveWatchlistTv usecase;
   late MockTvSeriesRepository mockTvSeriesRepository;
 
   setUp(() {
     mockTvSeriesRepository = MockTvSeriesRepository();
-    usecase = RemoveWatchlistTvSeries(mockTvSeriesRepository);
+    usecase = RemoveWatchlistTv(mockTvSeriesRepository);
   });
 
   test('should remove watchlist tv series from repository', () async {

@@ -1,4 +1,4 @@
-import 'package:core/presentation/bloc/popular_movies_bloc.dart';
+import 'package:core/presentation/bloc/movie/popular_movies_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../widgets/movie_card_list.dart';

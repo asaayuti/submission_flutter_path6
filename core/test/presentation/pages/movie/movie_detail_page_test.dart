@@ -1,6 +1,6 @@
-import 'package:core/presentation/bloc/movie_detail_bloc.dart';
-import 'package:core/presentation/bloc/movie_detail_event.dart';
-import 'package:core/presentation/bloc/movie_detail_state.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_bloc.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_event.dart';
+import 'package:core/presentation/bloc/movie/movie_detail_state.dart';
 import 'package:core/presentation/pages/movie/movie_detail_page.dart';
 import 'package:core/utils/dummy_data/dummy_movies.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,6 @@ void main() {
     mockMovieDetailBloc = MockMovieDetailBloc();
   });
 
-  // Helper function to wrap your widget with MaterialApp and provide the bloc.
   Widget makeTestableWidget(Widget child) {
     return MaterialApp(
       home: BlocProvider<MovieDetailBloc>.value(
@@ -33,10 +32,8 @@ void main() {
     testWidgets('Displays loading indicator when state is MovieDetailLoading', (
       WidgetTester tester,
     ) async {
-      // Arrange: Stub the bloc state to return loading.
       when(mockMovieDetailBloc.state).thenReturn(MovieDetailLoading());
       await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
-      // Assert: Verify that a CircularProgressIndicator is found.
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
@@ -52,29 +49,22 @@ void main() {
         ),
       );
 
-      // Act: Pump the widget.
       await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
-      await tester.pump(
-        const Duration(seconds: 1),
-      ); // let the widget build and animations settle for 1 second
-      // Assert: Verify movie details appear.
+      await tester.pump(const Duration(seconds: 1));
       expect(find.text('title'), findsOneWidget);
       expect(find.text('overview'), findsOneWidget);
-      // Check that the watchlist button is present.
       expect(find.byType(FilledButton), findsOneWidget);
     });
 
     testWidgets('Displays error message when state is MovieDetailError', (
       WidgetTester tester,
     ) async {
-      // Arrange: Stub the bloc state to return an error.
       when(
         mockMovieDetailBloc.state,
       ).thenReturn(MovieDetailError('Error Message'));
       await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
       await tester.pump();
 
-      // Assert: Verify that the error message is displayed.
       expect(find.text('Error Message'), findsOneWidget);
     });
 
@@ -90,17 +80,13 @@ void main() {
           ),
         );
 
-        // Act: Pump the widget and tap the watchlist button.
         await tester.pumpWidget(
           makeTestableWidget(const MovieDetailPage(id: 1)),
         );
-        await tester.pump(
-          const Duration(seconds: 1),
-        ); // let the widget build and animations settle for 1 second
+        await tester.pump(const Duration(seconds: 1));
         final watchlistButton = find.byType(FilledButton);
         expect(watchlistButton, findsOneWidget);
         await tester.tap(watchlistButton);
-        // Assert: Verify that the AddWatchlist event was added.
         verify(mockMovieDetailBloc.add(AddWatchlist(tMovieDetail))).called(1);
       },
     );
@@ -117,17 +103,13 @@ void main() {
           ),
         );
 
-        // Act: Pump the widget and tap the watchlist button.
         await tester.pumpWidget(
           makeTestableWidget(const MovieDetailPage(id: 1)),
         );
-        await tester.pump(
-          const Duration(seconds: 1),
-        ); // let the widget build and animations settle for 1 second
+        await tester.pump(const Duration(seconds: 1));
         final watchlistButton = find.byType(FilledButton);
         expect(watchlistButton, findsOneWidget);
         await tester.tap(watchlistButton);
-        // Assert: Verify that the RemoveFromWatchlist event was added.
         verify(
           mockMovieDetailBloc.add(RemoveFromWatchlist(tMovieDetail)),
         ).called(1);
