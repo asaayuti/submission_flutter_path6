@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:core/utils/constants.dart';
 import 'package:core/utils/exception.dart';
+import 'package:core/utils/json_reader.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
@@ -11,7 +12,6 @@ import 'package:movies/data/models/movie_detail_model.dart';
 import 'package:movies/data/models/movie_response.dart';
 import 'package:movies/dummy_data/dummy_movie_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
-import '../../json_reader.dart';
 
 void main() {
   late MovieRemoteDataSourceImpl dataSource;

@@ -16,6 +16,8 @@ dependencies:
     path: ../core
   movies:
     path: ../movies
+  tv_series:
+    path: ../tv_series
 
   dartz: ^0.10.1
   provider: ^6.1.2

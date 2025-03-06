@@ -8,6 +8,7 @@ import 'package:movies/dummy_data/dummy_movie_objects.dart';
 import 'package:search/presentation/bloc/search_bloc.dart';
 import 'package:search/domain/usecase/search_movies.dart';
 import 'package:search/domain/usecase/search_tv_series.dart';
+import 'package:tv_series/dummy_data/dummy_tv_objects.dart';
 
 import 'search_bloc_test.mocks.dart';
 

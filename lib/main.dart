@@ -4,29 +4,26 @@ import 'package:movies/presentation/bloc/now_playing_movies_bloc.dart';
 import 'package:movies/presentation/bloc/popular_movies_bloc.dart';
 import 'package:movies/presentation/bloc/top_rated_movies_bloc.dart';
 import 'package:movies/presentation/bloc/watchlist_movie_bloc.dart';
-import 'package:core/presentation/bloc/tv_series/now_playing_tvs_bloc.dart';
-import 'package:core/presentation/bloc/tv_series/popular_tvs_bloc.dart';
-import 'package:core/presentation/bloc/tv_series/top_rated_tvs_bloc.dart';
-import 'package:core/presentation/bloc/tv_series/tv_detail_bloc.dart';
-import 'package:core/presentation/bloc/tv_series/watchlist_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/now_playing_tvs_bloc.dart';
+import 'package:tv_series/presentation/bloc/popular_tvs_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tvs_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:movies/presentation/pages/movie_detail_page.dart';
 import 'package:movies/presentation/pages/popular_movies_page.dart';
 import 'package:movies/presentation/pages/top_rated_movies_page.dart';
-import 'package:core/presentation/pages/tv_series/now_playing_tvs_page.dart';
-import 'package:core/presentation/pages/tv_series/popular_tvs_page.dart';
-import 'package:core/presentation/pages/tv_series/top_rated_tvs_page.dart';
-import 'package:core/presentation/pages/tv_series/tv_detail_page.dart';
-
+import 'package:tv_series/presentation/pages/now_playing_tvs_page.dart';
+import 'package:tv_series/presentation/pages/popular_tvs_page.dart';
+import 'package:tv_series/presentation/pages/top_rated_tvs_page.dart';
+import 'package:tv_series/presentation/pages/tv_detail_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
-
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
 import 'package:core/utils/utils.dart';
 import 'package:ditonton/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

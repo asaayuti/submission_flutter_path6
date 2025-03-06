@@ -1,12 +1,12 @@
 import 'package:core/data/datasources/db/database_helper.dart';
-import 'package:core/data/models/tv_series/tv_series_table.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movies/data/models/movie_table.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:tv_series/data/models/tv_series_table.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import 'database_helper_test.mocks.dart';
 
 @GenerateMocks([DatabaseHelper])
 void main() {

@@ -9,7 +9,6 @@ import 'dart:io' as _i19;
 import 'dart:typed_data' as _i21;
 
 import 'package:core/data/datasources/db/database_helper.dart' as _i15;
-import 'package:core/data/models/tv_series/tv_series_table.dart' as _i17;
 import 'package:core/utils/failure.dart' as _i7;
 import 'package:core/utils/ssl_client_provider.dart' as _i18;
 import 'package:dartz/dartz.dart' as _i2;
@@ -25,6 +24,7 @@ import 'package:movies/domain/entities/movie.dart' as _i8;
 import 'package:movies/domain/entities/movie_detail.dart' as _i9;
 import 'package:movies/domain/repositories/movie_repository.dart' as _i5;
 import 'package:sqflite_sqlcipher/sqflite.dart' as _i16;
+import 'package:tv_series/data/models/tv_series_table.dart' as _i17;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
