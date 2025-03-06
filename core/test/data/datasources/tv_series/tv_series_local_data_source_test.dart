@@ -1,10 +1,9 @@
 import 'package:core/data/datasources/tv_series/tv_series_local_data_source.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:core/utils/dummy_data/dummy_movies.dart';
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -82,10 +81,10 @@ void main() {
     test('should return Tv Series Detail Table when data is found', () async {
       // arrange
       when(
-        mockDatabaseHelper.getTvSeriesById(tMovieId),
+        mockDatabaseHelper.getTvSeriesById(tTvSeriesId),
       ).thenAnswer((_) async => tTvSeriesMap);
       // act
-      final result = await dataSource.getTvSeriesById(tMovieId);
+      final result = await dataSource.getTvSeriesById(tTvSeriesId);
       // assert
       expect(result, tTvSeriesTable);
     });
@@ -93,10 +92,10 @@ void main() {
     test('should return null when data is not found', () async {
       // arrange
       when(
-        mockDatabaseHelper.getTvSeriesById(tMovieId),
+        mockDatabaseHelper.getTvSeriesById(tTvSeriesId),
       ).thenAnswer((_) async => null);
       // act
-      final result = await dataSource.getTvSeriesById(tMovieId);
+      final result = await dataSource.getTvSeriesById(tTvSeriesId);
       // assert
       expect(result, null);
     });

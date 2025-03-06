@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/usecases/tv_series/get_watchlist_tv_series.dart';
 import 'package:core/presentation/bloc/tv_series/watchlist_tv_bloc.dart';
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

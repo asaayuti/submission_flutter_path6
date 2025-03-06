@@ -6,7 +6,7 @@ import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/genre.dart';
+import 'package:movies/domain/entities/genre.dart';
 import '../../../domain/entities/tv_series/tv_series.dart';
 import '../../../domain/entities/tv_series/tv_series_detail.dart';
 import 'package:flutter/material.dart';

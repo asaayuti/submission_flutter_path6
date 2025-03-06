@@ -30,6 +30,8 @@ dependencies:
     path: core
   search:
     path: search
+  movies:
+    path: movies
 
   http: ^1.2.2
   provider: ^6.1.2

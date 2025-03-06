@@ -8,7 +8,7 @@ import 'package:core/domain/usecases/tv_series/save_watchlist_tv_series.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_event.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_state.dart';
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -53,17 +53,17 @@ void main() {
       'emits [TvDetailLoading, TvDetailLoaded] when data is fetched successfully',
       build: () {
         when(
-          mockGetTvDetail.execute(tTvId),
+          mockGetTvDetail.execute(tTvSeriesId),
         ).thenAnswer((_) async => Right(tTvSeriesDetail));
         when(
-          mockGetTvRecommendations.execute(tTvId),
+          mockGetTvRecommendations.execute(tTvSeriesId),
         ).thenAnswer((_) async => Right(tTvSeriesList));
         when(
-          mockGetWatchListStatus.execute(tTvId),
+          mockGetWatchListStatus.execute(tTvSeriesId),
         ).thenAnswer((_) async => true);
         return bloc;
       },
-      act: (bloc) => bloc.add(FetchTvDetail(tTvId)),
+      act: (bloc) => bloc.add(FetchTvDetail(tTvSeriesId)),
       expect:
           () => [
             TvDetailLoading(),
@@ -79,17 +79,17 @@ void main() {
       'emits [TvDetailLoading, TvDetailError] when getTvDetail fails',
       build: () {
         when(
-          mockGetTvDetail.execute(tTvId),
+          mockGetTvDetail.execute(tTvSeriesId),
         ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
         when(
-          mockGetTvRecommendations.execute(tTvId),
+          mockGetTvRecommendations.execute(tTvSeriesId),
         ).thenAnswer((_) async => Right(tTvSeriesList));
         when(
-          mockGetWatchListStatus.execute(tTvId),
+          mockGetWatchListStatus.execute(tTvSeriesId),
         ).thenAnswer((_) async => true);
         return bloc;
       },
-      act: (bloc) => bloc.add(FetchTvDetail(tTvId)),
+      act: (bloc) => bloc.add(FetchTvDetail(tTvSeriesId)),
       expect: () => [TvDetailLoading(), TvDetailError('Server Failure')],
     );
   });
@@ -102,7 +102,7 @@ void main() {
           mockSaveWatchlist.execute(tTvSeriesDetail),
         ).thenAnswer((_) async => Right("Added to Watchlist"));
         when(
-          mockGetWatchListStatus.execute(tTvId),
+          mockGetWatchListStatus.execute(tTvSeriesId),
         ).thenAnswer((_) async => true);
         return bloc;
       },
@@ -133,7 +133,7 @@ void main() {
           mockRemoveWatchlist.execute(tTvSeriesDetail),
         ).thenAnswer((_) async => Right("Removed from Watchlist"));
         when(
-          mockGetWatchListStatus.execute(tTvId),
+          mockGetWatchListStatus.execute(tTvSeriesId),
         ).thenAnswer((_) async => false);
         return bloc;
       },
@@ -161,7 +161,7 @@ void main() {
       'emits updated state with new watchlist status when LoadWatchlistStatus is added',
       build: () {
         when(
-          mockGetWatchListStatus.execute(tTvId),
+          mockGetWatchListStatus.execute(tTvSeriesId),
         ).thenAnswer((_) async => false);
         return bloc;
       },
@@ -171,7 +171,7 @@ void main() {
             recommendations: tTvSeriesList,
             isAddedToWatchlist: true,
           ),
-      act: (bloc) => bloc.add(LoadWatchlistStatus(tTvId)),
+      act: (bloc) => bloc.add(LoadWatchlistStatus(tTvSeriesId)),
       expect:
           () => [
             TvDetailHasData(
@@ -187,7 +187,7 @@ void main() {
       'does nothing when LoadWatchlistStatus is added in a non-loaded state',
       build: () => bloc,
       seed: () => TvDetailEmpty(),
-      act: (bloc) => bloc.add(LoadWatchlistStatus(tTvId)),
+      act: (bloc) => bloc.add(LoadWatchlistStatus(tTvSeriesId)),
       expect: () => [],
     );
   });

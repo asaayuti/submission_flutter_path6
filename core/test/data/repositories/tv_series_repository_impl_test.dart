@@ -1,14 +1,13 @@
 import 'dart:io';
 
 import 'package:core/data/repositories/tv_series_repository_impl.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import 'package:core/utils/exception.dart';
 import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:core/utils/dummy_data/dummy_movies.dart';
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -184,12 +183,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getTvSeriesDetail(tTvId),
+          mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId),
         ).thenAnswer((_) async => tTvSeriesDetailResponse);
         // act
-        final result = await repository.getTvSeriesDetail(tTvId);
+        final result = await repository.getTvSeriesDetail(tTvSeriesId);
         // assert
-        verify(mockRemoteDataSource.getTvSeriesDetail(tTvId));
+        verify(mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId));
         expect(result, equals(Right(tTvSeriesDetail)));
       },
     );
@@ -199,12 +198,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getTvSeriesDetail(tTvId),
+          mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId),
         ).thenThrow(ServerException());
         // act
-        final result = await repository.getTvSeriesDetail(tTvId);
+        final result = await repository.getTvSeriesDetail(tTvSeriesId);
         // assert
-        verify(mockRemoteDataSource.getTvSeriesDetail(tTvId));
+        verify(mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId));
         expect(
           result,
           equals(Left(ServerFailure('Failed to fetch data from server'))),
@@ -217,12 +216,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getTvSeriesDetail(tTvId),
+          mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId),
         ).thenThrow(SocketException('Failed to connect to the network'));
         // act
-        final result = await repository.getTvSeriesDetail(tTvId);
+        final result = await repository.getTvSeriesDetail(tTvSeriesId);
         // assert
-        verify(mockRemoteDataSource.getTvSeriesDetail(tTvId));
+        verify(mockRemoteDataSource.getTvSeriesDetail(tTvSeriesId));
         expect(
           result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))),
@@ -235,12 +234,12 @@ void main() {
     test('should return data (movie list) when the call is successful', () async {
       // arrange
       when(
-        mockRemoteDataSource.getTvSeriesRecommendations(tTvId),
+        mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId),
       ).thenAnswer((_) async => tEmptyTvSeriesModelList);
       // act
-      final result = await repository.getTvSeriesRecommendations(tTvId);
+      final result = await repository.getTvSeriesRecommendations(tTvSeriesId);
       // assert
-      verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvId));
+      verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId));
       /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
       final resultList = result.getOrElse(() => []);
       expect(resultList, equals(tEmptyTvSeriesModelList));
@@ -251,12 +250,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getTvSeriesRecommendations(tTvId),
+          mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId),
         ).thenThrow(ServerException());
         // act
-        final result = await repository.getTvSeriesRecommendations(tTvId);
+        final result = await repository.getTvSeriesRecommendations(tTvSeriesId);
         // assertbuild runner
-        verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvId));
+        verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId));
         expect(
           result,
           equals(Left(ServerFailure('Failed to fetch data from server'))),
@@ -269,12 +268,12 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.getTvSeriesRecommendations(tTvId),
+          mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId),
         ).thenThrow(SocketException('Failed to connect to the network'));
         // act
-        final result = await repository.getTvSeriesRecommendations(tTvId);
+        final result = await repository.getTvSeriesRecommendations(tTvSeriesId);
         // assert
-        verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvId));
+        verify(mockRemoteDataSource.getTvSeriesRecommendations(tTvSeriesId));
         expect(
           result,
           equals(Left(ConnectionFailure('Failed to connect to the network'))),
@@ -289,10 +288,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.searchTvSeries(tQuery),
+          mockRemoteDataSource.searchTvSeries(tTvSeriesQuery),
         ).thenAnswer((_) async => tTvSeriesModelList);
         // act
-        final result = await repository.searchTvSeries(tQuery);
+        final result = await repository.searchTvSeries(tTvSeriesQuery);
         // assert
         /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
         final resultList = result.getOrElse(() => []);
@@ -305,10 +304,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.searchTvSeries(tQuery),
+          mockRemoteDataSource.searchTvSeries(tTvSeriesQuery),
         ).thenThrow(ServerException());
         // act
-        final result = await repository.searchTvSeries(tQuery);
+        final result = await repository.searchTvSeries(tTvSeriesQuery);
         // assert
         expect(result, Left(ServerFailure('Failed to fetch data from server')));
       },
@@ -319,10 +318,10 @@ void main() {
       () async {
         // arrange
         when(
-          mockRemoteDataSource.searchTvSeries(tQuery),
+          mockRemoteDataSource.searchTvSeries(tTvSeriesQuery),
         ).thenThrow(SocketException('Failed to connect to the network'));
         // act
-        final result = await repository.searchTvSeries(tQuery);
+        final result = await repository.searchTvSeries(tTvSeriesQuery);
         // assert
         expect(
           result,
@@ -390,10 +389,10 @@ void main() {
     test('should return watch status whether data is found', () async {
       // arrange
       when(
-        mockLocalDataSource.getTvSeriesById(tTvId),
+        mockLocalDataSource.getTvSeriesById(tTvSeriesId),
       ).thenAnswer((_) async => null);
       // act
-      final result = await repository.isAddedToWatchlist(tTvId);
+      final result = await repository.isAddedToWatchlist(tTvSeriesId);
       // assert
       expect(result, false);
     });

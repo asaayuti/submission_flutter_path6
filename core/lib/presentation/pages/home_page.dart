@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/presentation/bloc/movie/now_playing_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/popular_movies_bloc.dart';
-import 'package:core/presentation/bloc/movie/top_rated_movies_bloc.dart';
+
 import 'package:core/presentation/bloc/tv_series/now_playing_tvs_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/popular_tvs_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/top_rated_tvs_bloc.dart';
@@ -9,7 +7,10 @@ import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/constants.dart';
 import 'package:core/utils/routes.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../domain/entities/movie/movie.dart';
+import 'package:movies/domain/entities/movie.dart';
+import 'package:movies/presentation/bloc/now_playing_movies_bloc.dart';
+import 'package:movies/presentation/bloc/popular_movies_bloc.dart';
+import 'package:movies/presentation/bloc/top_rated_movies_bloc.dart';
 import '../../domain/entities/tv_series/tv_series.dart';
 import 'package:flutter/material.dart';
 

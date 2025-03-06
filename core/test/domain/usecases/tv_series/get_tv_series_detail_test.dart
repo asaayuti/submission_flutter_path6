@@ -3,7 +3,7 @@ import 'package:core/domain/usecases/tv_series/get_tv_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import '../../../helpers/test_helper.mocks.dart';
 
 void main() {
@@ -18,10 +18,10 @@ void main() {
   test('should get movie detail from the repository', () async {
     // arrange
     when(
-      mockTvSeriesRepository.getTvSeriesDetail(tTvId),
+      mockTvSeriesRepository.getTvSeriesDetail(tTvSeriesId),
     ).thenAnswer((_) async => Right(tTvSeriesDetail));
     // act
-    final result = await usecase.execute(tTvId);
+    final result = await usecase.execute(tTvSeriesId);
     // assert
     expect(result, Right(tTvSeriesDetail));
   });

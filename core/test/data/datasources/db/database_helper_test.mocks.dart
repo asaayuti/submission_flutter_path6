@@ -6,9 +6,9 @@
 import 'dart:async' as _i3;
 
 import 'package:core/data/datasources/db/database_helper.dart' as _i2;
-import 'package:core/data/models/movie/movie_table.dart' as _i5;
 import 'package:core/data/models/tv_series/tv_series_table.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:movies/data/models/movie_table.dart' as _i5;
 import 'package:sqflite_sqlcipher/sqflite.dart' as _i4;
 
 // ignore_for_file: type=lint

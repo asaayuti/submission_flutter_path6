@@ -1,5 +1,5 @@
-import '../genre.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movies/domain/entities/genre.dart';
 
 class TvSeriesDetail extends Equatable {
   const TvSeriesDetail({

@@ -2,7 +2,7 @@ import 'package:core/presentation/bloc/tv_series/tv_detail_bloc.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_event.dart';
 import 'package:core/presentation/bloc/tv_series/tv_detail_state.dart';
 import 'package:core/presentation/pages/tv_series/tv_detail_page.dart';
-import 'package:core/utils/dummy_data/dummy_tv_series.dart';
+import 'package:core/utils/dummy_tv_series.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
