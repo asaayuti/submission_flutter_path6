@@ -25,15 +25,15 @@ dependencies:
     sdk: flutter
 
   about:
-    path: about
+    path: packages/about
   core:
-    path: core
+    path: packages/core
   search:
-    path: search
+    path: packages/search
   movies:
-    path: movies
+    path: packages/movies
   tv_series:
-    path: tv_series
+    path: packages/tv_series
 
   http: ^1.2.2
   provider: ^6.1.2
